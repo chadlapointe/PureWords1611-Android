@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0D1B2A"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pure Words 1611"
+            android:textSize="36sp"
+            android:textColor="#FFD700"
+            android:textStyle="bold"
+            android:layout_marginBottom="48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Psalm 12:6–7 (1611 KJV)"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="The wordes of the Lord are pure wordes: as siluer tried in a fornace of earth purified seuen times.\n\nThou shalt keepe them, O Lord, thou shalt preserue them from this generation for euer."
+            android:textSize="22sp"
+            android:textColor="#E0E1DD"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:layout_marginBottom="40dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="God has perfectly preserved His pure words in the 1611 King James Bible for English-speaking believers."
+            android:textSize="18sp"
+            android:textColor="#778DA9"
+            android:gravity="center"
+            android:padding="20dp" />
+
+    </LinearLayout>
+</ScrollView>
