@@ -57,7 +57,9 @@ This repository includes comprehensive documentation for setting up and publishi
 
 ### Documentation
 
+- **[Quick Start Guide](docs/QUICKSTART.md)** - ⚡ Fast-track guide for Google Play registration (start here!)
 - **[Google Play Setup Guide](docs/GOOGLE_PLAY_SETUP.md)** - Complete walkthrough for creating a Google Play Developer account and registering the app
+- **[Assets Guide](docs/ASSETS_GUIDE.md)** - Detailed specifications for all required graphics and screenshots
 - **[Store Listing Content](docs/STORE_LISTING.md)** - Pre-written descriptions, keywords, and marketing copy for the Play Store
 - **[Privacy Policy](docs/PRIVACY_POLICY.md)** - Template privacy policy required for Play Store submission
 - **[Deployment Checklist](docs/DEPLOYMENT_CHECKLIST.md)** - Step-by-step checklist to ensure nothing is missed before deployment
@@ -65,9 +67,13 @@ This repository includes comprehensive documentation for setting up and publishi
 
 ### Quick Start for Play Store Submission
 
+**New to Google Play?** Start with the [Quick Start Guide](docs/QUICKSTART.md) for a condensed walkthrough!
+
+**Detailed Process:**
+
 1. Review the [Google Play Setup Guide](docs/GOOGLE_PLAY_SETUP.md)
 2. Create your Google Play Developer account ($25 one-time fee)
-3. Prepare required assets (app icon, screenshots, feature graphic)
+3. Prepare required assets using the [Assets Guide](docs/ASSETS_GUIDE.md) (app icon, screenshots, feature graphic)
 4. Complete the [Deployment Checklist](docs/DEPLOYMENT_CHECKLIST.md)
 5. Build and sign your release AAB
 6. Upload to Google Play Console
