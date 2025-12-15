@@ -57,7 +57,9 @@ This repository includes comprehensive documentation for setting up and publishi
 
 ### Documentation
 
-- **[Quick Start Guide](docs/QUICKSTART.md)** - ⚡ Fast-track guide for Google Play registration (start here!)
+📚 **Start Here**: [Documentation Setup Guide](docs/SETUP_GUIDE.md) - Learn how to use these templates
+
+- **[Quick Start Guide](docs/QUICKSTART.md)** - ⚡ Fast-track guide for Google Play registration
 - **[Google Play Setup Guide](docs/GOOGLE_PLAY_SETUP.md)** - Complete walkthrough for creating a Google Play Developer account and registering the app
 - **[Assets Guide](docs/ASSETS_GUIDE.md)** - Detailed specifications for all required graphics and screenshots
 - **[Store Listing Content](docs/STORE_LISTING.md)** - Pre-written descriptions, keywords, and marketing copy for the Play Store
@@ -85,7 +87,10 @@ This repository includes comprehensive documentation for setting up and publishi
 ```
 PureWords1611-Android/
 ├── docs/                          # Documentation
+│   ├── SETUP_GUIDE.md            # How to use the documentation templates
+│   ├── QUICKSTART.md             # Quick start guide
 │   ├── GOOGLE_PLAY_SETUP.md      # Play Store setup guide
+│   ├── ASSETS_GUIDE.md           # Graphics assets specifications
 │   ├── STORE_LISTING.md          # Store listing content
 │   ├── PRIVACY_POLICY.md         # Privacy policy template
 │   ├── DEPLOYMENT_CHECKLIST.md   # Deployment checklist
