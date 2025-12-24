@@ -59,6 +59,10 @@ This repository includes comprehensive documentation for setting up and publishi
 
 📚 **Start Here**: [Documentation Setup Guide](docs/SETUP_GUIDE.md) - Learn how to use these templates
 
+#### Planning & Concept
+- **[App Concept & Feature List](docs/APP_CONCEPT.md)** - 📱 Complete app concept definition, feature roadmap, user personas, and technical architecture
+
+#### Play Store Setup
 - **[Quick Start Guide](docs/QUICKSTART.md)** - ⚡ Fast-track guide for Google Play registration
 - **[Google Play Setup Guide](docs/GOOGLE_PLAY_SETUP.md)** - Complete walkthrough for creating a Google Play Developer account and registering the app
 - **[Assets Guide](docs/ASSETS_GUIDE.md)** - Detailed specifications for all required graphics and screenshots
@@ -87,6 +91,7 @@ This repository includes comprehensive documentation for setting up and publishi
 ```
 PureWords1611-Android/
 ├── docs/                          # Documentation
+│   ├── APP_CONCEPT.md            # Complete app concept & feature definition
 │   ├── SETUP_GUIDE.md            # How to use the documentation templates
 │   ├── QUICKSTART.md             # Quick start guide
 │   ├── GOOGLE_PLAY_SETUP.md      # Play Store setup guide
