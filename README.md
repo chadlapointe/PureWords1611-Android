@@ -200,8 +200,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions, support, or feedback:
 
-- **Email**: [your-email@example.com]
 - **Issues**: [GitHub Issues](https://github.com/chadlapointe/PureWords1611-Android/issues)
+- **Repository**: [chadlapointe/PureWords1611-Android](https://github.com/chadlapointe/PureWords1611-Android)
 
 ## 🙏 Acknowledgments
 
