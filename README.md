@@ -57,14 +57,16 @@ This repository includes comprehensive documentation for setting up and publishi
 
 ### 🎯 Start Here - Complete Setup Summary
 
-**📚 [Google Play Setup Summary](docs/GOOGLE_PLAY_SETUP_SUMMARY.md)** - ⭐ **NEW!** Complete overview of what's been prepared and what you need to do
+**📋 [Manual Setup Instructions](docs/MANUAL_SETUP_INSTRUCTIONS.md)** - ⭐ **START HERE!** Your action plan - exactly what YOU need to do (5 tasks)
 
-This document provides:
+**📚 [Google Play Setup Summary](docs/GOOGLE_PLAY_SETUP_SUMMARY.md)** - Complete overview of what's been prepared and what you need to do
+
+These documents provide:
 - ✅ Status of all documentation (100% complete)
-- 📋 Clear action plan for manual setup steps
-- ⏱️ Time estimates for each phase
-- 💰 Cost breakdown
+- 📋 Clear action plan: 5 manual tasks (4-7 hours + $25)
+- ⏱️ Time estimates and cost breakdown for each task
 - ✅ Pre-submission checklist
+- 🎯 Recommended order and timeline
 
 ### Documentation
 
@@ -74,7 +76,8 @@ This document provides:
 - **[App Concept & Feature List](docs/APP_CONCEPT.md)** - 📱 Complete app concept definition, feature roadmap, user personas, and technical architecture
 
 #### Play Store Setup Guides
-- **[Google Play Setup Summary](docs/GOOGLE_PLAY_SETUP_SUMMARY.md)** - ⭐ Complete overview: What's ready vs what you need to do
+- **[Manual Setup Instructions](docs/MANUAL_SETUP_INSTRUCTIONS.md)** - ⭐ **ACTION PLAN**: Your 5 tasks to get on Play Store
+- **[Google Play Setup Summary](docs/GOOGLE_PLAY_SETUP_SUMMARY.md)** - Complete overview: What's ready vs what you need to do
 - **[Quick Start Guide](docs/QUICKSTART.md)** - ⚡ Fast-track guide for Google Play registration
 - **[Google Play Setup Guide](docs/GOOGLE_PLAY_SETUP.md)** - Complete walkthrough for creating a Google Play Developer account and registering the app
 - **[Setup Progress Tracker](docs/PLAY_CONSOLE_SETUP_TRACKER.md)** - 📊 Step-by-step progress tracker with checkboxes for the entire setup process
@@ -96,12 +99,13 @@ This document provides:
 
 **New to Google Play?** Follow this simple workflow:
 
-1. **📊 Overview**: Start with the [**Setup Summary**](docs/GOOGLE_PLAY_SETUP_SUMMARY.md) to understand what's ready and what you need to do
-2. **📖 Quick Guide**: Read the [Quick Start Guide](docs/QUICKSTART.md) for a condensed walkthrough
-3. **📋 Track Progress**: Use the [Setup Progress Tracker](docs/PLAY_CONSOLE_SETUP_TRACKER.md) to follow each step
-4. **✍️ Copy Content**: Copy content from [App Listing Draft](docs/PLAY_CONSOLE_APP_LISTING_DRAFT.md) directly into Play Console
-5. **🎨 Create Assets**: Create graphics using specifications in [Assets Guide](docs/ASSETS_GUIDE.md) and [Screenshot Mockup Guide](docs/SCREENSHOT_MOCKUP_GUIDE.md)
-6. **✅ Final Check**: Use [Deployment Checklist](docs/DEPLOYMENT_CHECKLIST.md) before submission
+1. **🎯 Action Plan**: Start with [**Manual Setup Instructions**](docs/MANUAL_SETUP_INSTRUCTIONS.md) - your exact 5-task action plan
+2. **📊 Full Overview**: Read [Setup Summary](docs/GOOGLE_PLAY_SETUP_SUMMARY.md) to understand what's ready and what you need to do
+3. **📖 Quick Guide**: Review [Quick Start Guide](docs/QUICKSTART.md) for a condensed walkthrough
+4. **📋 Track Progress**: Use [Setup Progress Tracker](docs/PLAY_CONSOLE_SETUP_TRACKER.md) as you complete each step
+5. **✍️ Copy Content**: Copy content from [App Listing Draft](docs/PLAY_CONSOLE_APP_LISTING_DRAFT.md) directly into Play Console
+6. **🎨 Create Assets**: Create graphics using specifications in [Assets Guide](docs/ASSETS_GUIDE.md) and [Screenshot Mockup Guide](docs/SCREENSHOT_MOCKUP_GUIDE.md)
+7. **✅ Final Check**: Use [Deployment Checklist](docs/DEPLOYMENT_CHECKLIST.md) before submission
 
 **Detailed Step-by-Step Process:**
 
@@ -120,7 +124,8 @@ This document provides:
 ```
 PureWords1611-Android/
 ├── docs/                                    # Documentation
-│   ├── GOOGLE_PLAY_SETUP_SUMMARY.md         # ⭐ Complete setup overview (NEW!)
+│   ├── MANUAL_SETUP_INSTRUCTIONS.md         # ⭐ Your action plan - 5 tasks (NEW!)
+│   ├── GOOGLE_PLAY_SETUP_SUMMARY.md         # Complete setup overview (NEW!)
 │   ├── APP_CONCEPT.md                       # Complete app concept & feature definition
 │   ├── SETUP_GUIDE.md                       # How to use the documentation templates
 │   ├── QUICKSTART.md                        # Quick start guide
