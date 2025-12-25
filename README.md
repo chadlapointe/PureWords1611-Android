@@ -2,8 +2,13 @@
 
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://developer.android.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Build Status](https://img.shields.io/badge/build-setup_complete-blue.svg)](SETUP_COMPLETE.md)
 
 **Pure Words 1611** is an Android application that delivers daily Bible verses from the authentic 1611 King James Version. Start each day with God's Word, conveniently accessible on your mobile device.
+
+> **📱 Project Status**: Android project structure is complete! See [SETUP_COMPLETE.md](SETUP_COMPLETE.md) for details.
+>
+> ⚠️ **Note**: Build requires Maven repository access. See [BUILD_ENVIRONMENT_ISSUE.md](BUILD_ENVIRONMENT_ISSUE.md) for details.
 
 ## 📖 About
 

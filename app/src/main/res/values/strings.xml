@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Pure Words 1611</string>
+    <string name="daily_verse">Daily Verse</string>
+    <string name="verse_loading">Loading verse...</string>
+    <string name="share_verse">Share Verse</string>
+    <string name="bookmark_verse">Bookmark</string>
+    <string name="notification_title">Daily Bible Verse</string>
+    <string name="notification_channel_name">Daily Verses</string>
+    <string name="notification_channel_description">Receive daily Bible verses from the KJV 1611</string>
+</resources>
