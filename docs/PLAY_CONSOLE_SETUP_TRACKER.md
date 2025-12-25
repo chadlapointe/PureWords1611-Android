@@ -484,13 +484,15 @@
 ## Post-Submission Tracking 🕐
 
 **Submission Date**: [Date]  
-**Current Status**: Pending Review ⏳
+**Current Status**: Not Started ⚪
+
+**Status will change to**: Pending Review ⏳ (after submission)
 
 ### Review Status Updates
 
 | Date | Time | Status | Notes |
 |------|------|--------|-------|
-| [Date] | [Time] | Submitted | Initial submission |
+| [Date] | [Time] | Not Started | Before submission |
 | | | | |
 | | | | |
 

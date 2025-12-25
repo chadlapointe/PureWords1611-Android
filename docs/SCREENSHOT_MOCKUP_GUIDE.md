@@ -527,7 +527,7 @@ This order prioritizes:
 ### Technical Tips
 1. **Use Templates**: Start with device frame templates for consistency
 2. **Export 2x**: Create mockups at 2x resolution then scale down for sharper images
-3. **Clean Status Bar**: Show good signal, full battery, reasonable time (9:41 AM is Apple's default, but any time works)
+3. **Clean Status Bar**: Show good signal, full battery, reasonable time (10:10 AM is commonly used in Android screenshots)
 4. **Test on Device**: View screenshots on actual phone to check readability
 5. **Name Files Clearly**: Use descriptive names like `phone_01_daily_verse.png`
 

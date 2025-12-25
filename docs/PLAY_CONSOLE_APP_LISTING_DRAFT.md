@@ -124,7 +124,9 @@ Download Pure Words 1611 today and make God's Word a daily priority in your life
 ---
 
 📧 SUPPORT
-For questions or feedback: [your-email@example.com]
+For questions or feedback: YOUR_SUPPORT_EMAIL_HERE
+
+⚠️ IMPORTANT: Replace YOUR_SUPPORT_EMAIL_HERE with your actual support email before pasting into Play Console!
 
 ⭐ HELP US GROW
 If you enjoy Pure Words 1611, please leave a review and share it with fellow believers!
@@ -132,7 +134,10 @@ If you enjoy Pure Words 1611, please leave a review and share it with fellow bel
 
 **Character Count**: ~2,450 / 4,000
 
-**BEFORE PASTING**: Replace `[your-email@example.com]` with your actual support email address.
+**⚠️ CRITICAL - BEFORE PASTING**: 
+1. Replace `YOUR_SUPPORT_EMAIL_HERE` with your actual support email address
+2. Review all content for accuracy
+3. Verify character count is within limit
 
 ---
 
@@ -190,19 +195,19 @@ authentic KJV 1611, traditional Bible translation, pure scripture, verse of the 
 
 ### Email (Required)
 ```
-[your-email@example.com]
+YOUR_SUPPORT_EMAIL_HERE
 ```
-**BEFORE SUBMITTING**: Replace with your actual support email that you check regularly.
+**⚠️ CRITICAL - BEFORE SUBMITTING**: Replace with your actual support email that you check regularly.
 
 ### Website (Optional)
 ```
-[your-website-url]
+YOUR_WEBSITE_URL_HERE
 ```
 OR leave blank if you don't have a website yet.
 
 ### Phone Number (Optional)
 ```
-[your-phone-number]
+YOUR_PHONE_NUMBER_HERE
 ```
 OR leave blank (not required for most apps).
 
@@ -256,8 +261,10 @@ Based on a Bible verse app with no user-generated content or social features:
 
 ### Privacy Policy URL (Required)
 ```
-[Your privacy policy URL - must be HTTPS]
+YOUR_PRIVACY_POLICY_URL_HERE
 ```
+
+**⚠️ CRITICAL - Must be HTTPS**
 
 **Examples**:
 - `https://yourdomain.com/privacy-policy`
@@ -461,12 +468,16 @@ Price range: $0.99 - $9.99
 
 Thank you for downloading Pure Words 1611. May God's Word bless and guide you daily!
 
-🙏 Questions or feedback? Contact us at [your-email@example.com]
+🙏 Questions or feedback? Contact us at YOUR_SUPPORT_EMAIL_HERE
+
+⚠️ IMPORTANT: Replace YOUR_SUPPORT_EMAIL_HERE before pasting!
+
 ⭐ Enjoying the app? Please leave a review!
 ```
 
-**Character Count**: ~850 / 500 typical limit
-**Note**: If too long, Google Play Console will enforce a limit. Here's a shorter version:
+**Character Count**: ~900 / 500 typical limit  
+
+**⚠️ Note**: If too long, Google Play Console will enforce a limit. Use the shorter version below:
 
 ### Version 1.0.0 (Shorter Version for Console)
 ```
