@@ -83,7 +83,7 @@ fun PlayingScreen(
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "Lives: ${"❤️".repeat(uiState.lives)}",
+                text = "Lives: ${uiState.lives}/3",
                 style = MaterialTheme.typography.titleMedium
             )
         }

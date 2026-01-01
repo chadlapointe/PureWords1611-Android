@@ -22,8 +22,13 @@ class VerseRepository(private val context: Context) {
             try {
                 val json = context.assets.open("verses.json").bufferedReader().use { it.readText() }
                 verses = parseVerses(json)
-            } catch (e: Exception) {
-                // Return empty list if file not found or parsing fails
+            } catch (e: java.io.IOException) {
+                // Log error and return empty list if file cannot be read
+                android.util.Log.e("VerseRepository", "Failed to load verses.json", e)
+                verses = emptyList()
+            } catch (e: org.json.JSONException) {
+                // Log error and return empty list if JSON parsing fails
+                android.util.Log.e("VerseRepository", "Failed to parse verses.json", e)
                 verses = emptyList()
             }
         }

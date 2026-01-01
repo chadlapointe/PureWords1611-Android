@@ -8,10 +8,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.purewords1611.android.data.VerseRepository
 import com.purewords1611.android.ui.gameplay.GameplayScreen
 import com.purewords1611.android.ui.theme.PureWords1611Theme
 import com.purewords1611.android.viewmodel.GameViewModel
+import com.purewords1611.android.viewmodel.GameViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,9 +34,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun GameScreen() {
-    // Create repository and ViewModel
-    val repository = remember { VerseRepository(androidx.compose.ui.platform.LocalContext.current) }
-    val viewModel = remember { GameViewModel(repository) }
+    val context = LocalContext.current
+    val repository = remember { VerseRepository(context) }
+    
+    // Use viewModel() with factory for proper lifecycle management
+    val viewModel: GameViewModel = viewModel(
+        factory = GameViewModelFactory(repository)
+    )
     val uiState by viewModel.uiState.collectAsState()
     
     GameplayScreen(
