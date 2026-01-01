@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.purewords1611.android"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
