@@ -1,0 +1,62 @@
+[
+  {
+    "reference": "Genesis 1:1",
+    "text": "In the beginning God created the heaven and the earth.",
+    "blankedText": "In the _____ God created the heaven and the earth.",
+    "missingWords": ["beginning"]
+  },
+  {
+    "reference": "John 3:16",
+    "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+    "blankedText": "For God so _____ the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting _____.",
+    "missingWords": ["loved", "life"]
+  },
+  {
+    "reference": "Psalm 23:1",
+    "text": "The LORD is my shepherd; I shall not want.",
+    "blankedText": "The LORD is my _____; I shall not want.",
+    "missingWords": ["shepherd"]
+  },
+  {
+    "reference": "Proverbs 3:5",
+    "text": "Trust in the LORD with all thine heart; and lean not unto thine own understanding.",
+    "blankedText": "Trust in the LORD with all thine _____; and lean not unto thine own understanding.",
+    "missingWords": ["heart"]
+  },
+  {
+    "reference": "Philippians 4:13",
+    "text": "I can do all things through Christ which strengtheneth me.",
+    "blankedText": "I can do all things through _____ which strengtheneth me.",
+    "missingWords": ["Christ"]
+  },
+  {
+    "reference": "Romans 8:28",
+    "text": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+    "blankedText": "And we know that all things work together for _____ to them that love God, to them who are the called according to his purpose.",
+    "missingWords": ["good"]
+  },
+  {
+    "reference": "Psalm 119:105",
+    "text": "Thy word is a lamp unto my feet, and a light unto my path.",
+    "blankedText": "Thy word is a _____ unto my feet, and a light unto my path.",
+    "missingWords": ["lamp"]
+  },
+  {
+    "reference": "Matthew 6:33",
+    "text": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
+    "blankedText": "But seek ye first the _____ of God, and his righteousness; and all these things shall be added unto you.",
+    "missingWords": ["kingdom"]
+  },
+  {
+    "reference": "Isaiah 40:31",
+    "text": "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+    "blankedText": "But they that wait upon the LORD shall renew their _____; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+    "missingWords": ["strength"]
+  },
+  {
+    "reference": "Jeremiah 29:11",
+    "text": "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.",
+    "blankedText": "For I know the thoughts that I think toward you, saith the LORD, thoughts of _____, and not of evil, to give you an expected end.",
+    "missingWords": ["peace"]
+  }
+]
