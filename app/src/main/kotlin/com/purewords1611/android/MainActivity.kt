@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.purewords1611.android.analytics.AnalyticsManager
 import com.purewords1611.android.data.VerseRepository
 import com.purewords1611.android.data.WordDictionary
 import com.purewords1611.android.ui.GameModeSelectionScreen
@@ -45,23 +46,46 @@ enum class GameMode {
 
 @Composable
 fun GameScreen() {
+    val context = LocalContext.current
+    val analyticsManager = remember { AnalyticsManager.getInstance(context) }
     var currentMode by remember { mutableStateOf(GameMode.MENU) }
+    
+    // Track screen views when mode changes
+    LaunchedEffect(currentMode) {
+        when (currentMode) {
+            GameMode.MENU -> analyticsManager.trackScreenView("Menu")
+            GameMode.VERSE_GAME -> analyticsManager.trackScreenView("VerseGame")
+            GameMode.WORD_GRID -> analyticsManager.trackScreenView("WordGrid")
+        }
+    }
     
     when (currentMode) {
         GameMode.MENU -> {
             GameModeSelectionScreen(
-                onVerseGameSelected = { currentMode = GameMode.VERSE_GAME },
-                onWordGridSelected = { currentMode = GameMode.WORD_GRID }
+                onVerseGameSelected = { 
+                    analyticsManager.trackGameModeSelected("verse_game")
+                    currentMode = GameMode.VERSE_GAME
+                },
+                onWordGridSelected = { 
+                    analyticsManager.trackGameModeSelected("word_grid")
+                    currentMode = GameMode.WORD_GRID
+                }
             )
         }
         GameMode.VERSE_GAME -> {
             VerseGameScreen(
-                onBackToMenu = { currentMode = GameMode.MENU }
+                onBackToMenu = { 
+                    analyticsManager.trackReturnToMenu("VerseGame")
+                    currentMode = GameMode.MENU
+                }
             )
         }
         GameMode.WORD_GRID -> {
             WordGridScreen(
-                onBackToMenu = { currentMode = GameMode.MENU }
+                onBackToMenu = { 
+                    analyticsManager.trackReturnToMenu("WordGrid")
+                    currentMode = GameMode.MENU
+                }
             )
         }
     }
