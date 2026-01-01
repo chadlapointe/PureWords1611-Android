@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 fun GameModeSelectionScreen(
     onVerseGameSelected: () -> Unit,
     onWordGridSelected: () -> Unit,
+    onWordMatchingSelected: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -109,6 +110,44 @@ fun GameModeSelectionScreen(
                 
                 Text(
                     text = "• 2 minute timer\n• +10 base, +5 per extra letter\n• Find 10+ words to win",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(16.dp))
+        
+        // Word Matching Game Card
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp),
+            onClick = onWordMatchingSelected,
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Word Matching",
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = MaterialTheme.colorScheme.primary
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Text(
+                    text = "Match related words together! Find pairs of synonyms and related biblical terms.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                Text(
+                    text = "• 5 levels\n• +10 points per match\n• +50 bonus for perfect level",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
