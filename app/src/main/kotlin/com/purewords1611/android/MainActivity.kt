@@ -16,11 +16,13 @@ import com.purewords1611.android.data.WordDictionary
 import com.purewords1611.android.ui.GameModeSelectionScreen
 import com.purewords1611.android.ui.gameplay.GameplayScreen
 import com.purewords1611.android.ui.wordgrid.WordGridGameScreen
+import com.purewords1611.android.ui.wordmatching.WordMatchingGameScreen
 import com.purewords1611.android.ui.theme.PureWords1611Theme
 import com.purewords1611.android.viewmodel.GameViewModel
 import com.purewords1611.android.viewmodel.GameViewModelFactory
 import com.purewords1611.android.viewmodel.WordGridViewModel
 import com.purewords1611.android.viewmodel.WordGridViewModelFactory
+import com.purewords1611.android.viewmodel.WordMatchingViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +43,8 @@ class MainActivity : ComponentActivity() {
 enum class GameMode {
     MENU,
     VERSE_GAME,
-    WORD_GRID
+    WORD_GRID,
+    WORD_MATCHING
 }
 
 @Composable
@@ -56,6 +59,7 @@ fun GameScreen() {
             GameMode.MENU -> analyticsManager.trackScreenView("Menu")
             GameMode.VERSE_GAME -> analyticsManager.trackScreenView("VerseGame")
             GameMode.WORD_GRID -> analyticsManager.trackScreenView("WordGrid")
+            GameMode.WORD_MATCHING -> analyticsManager.trackScreenView("WordMatching")
         }
     }
     
@@ -69,6 +73,10 @@ fun GameScreen() {
                 onWordGridSelected = { 
                     analyticsManager.trackGameModeSelected("word_grid")
                     currentMode = GameMode.WORD_GRID
+                },
+                onWordMatchingSelected = {
+                    analyticsManager.trackGameModeSelected("word_matching")
+                    currentMode = GameMode.WORD_MATCHING
                 }
             )
         }
@@ -84,6 +92,14 @@ fun GameScreen() {
             WordGridScreen(
                 onBackToMenu = { 
                     analyticsManager.trackReturnToMenu("WordGrid")
+                    currentMode = GameMode.MENU
+                }
+            )
+        }
+        GameMode.WORD_MATCHING -> {
+            WordMatchingScreen(
+                onBackToMenu = {
+                    analyticsManager.trackReturnToMenu("WordMatching")
                     currentMode = GameMode.MENU
                 }
             )
@@ -152,6 +168,35 @@ fun WordGridScreen(onBackToMenu: () -> Unit) {
             onSubmitWord = { viewModel.submitWord() },
             onClearPath = { viewModel.clearPath() },
             onReset = { viewModel.resetGame() },
+            modifier = Modifier.padding(paddingValues)
+        )
+    }
+}
+
+@Composable
+fun WordMatchingScreen(onBackToMenu: () -> Unit) {
+    val viewModel: WordMatchingViewModel = viewModel()
+    val uiState by viewModel.uiState.collectAsState()
+    
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Word Matching") },
+                navigationIcon = {
+                    TextButton(onClick = onBackToMenu) {
+                        Text("← Menu")
+                    }
+                }
+            )
+        }
+    ) { paddingValues ->
+        WordMatchingGameScreen(
+            uiState = uiState,
+            onLeftWordClick = { id -> viewModel.selectLeftWord(id) },
+            onRightWordClick = { id -> viewModel.selectRightWord(id) },
+            onNextLevel = { viewModel.nextLevel() },
+            onRetryLevel = { viewModel.retryLevel() },
+            onResetGame = { viewModel.resetGame() },
             modifier = Modifier.padding(paddingValues)
         )
     }
