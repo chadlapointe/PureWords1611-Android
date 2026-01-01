@@ -39,6 +39,11 @@ data class WordMatchingUiState(
  */
 class WordMatchingViewModel : ViewModel() {
     
+    companion object {
+        // Offset for right word IDs to avoid collision with left word IDs
+        private const val RIGHT_WORD_ID_OFFSET = 1000
+    }
+    
     private val engine = WordMatchingEngine()
     
     private val _uiState = MutableStateFlow(WordMatchingUiState())
@@ -55,8 +60,9 @@ class WordMatchingViewModel : ViewModel() {
     
     /**
      * Load a specific level.
+     * @param resetScore If true, reset the score to 0 (used for game reset)
      */
-    private fun loadLevel(level: Int) {
+    private fun loadLevel(level: Int, resetScore: Boolean = false) {
         currentLevelPairs = engine.getLevelPairs(level)
         
         if (currentLevelPairs.isEmpty()) {
@@ -77,7 +83,7 @@ class WordMatchingViewModel : ViewModel() {
             MatchableWord(text = word, id = index)
         }
         val rightWords = rightShuffled.mapIndexed { index, word ->
-            MatchableWord(text = word, id = index + 1000) // Offset IDs to avoid collision
+            MatchableWord(text = word, id = index + RIGHT_WORD_ID_OFFSET)
         }
         
         // Build maps
@@ -89,7 +95,7 @@ class WordMatchingViewModel : ViewModel() {
             leftWords = leftWords,
             rightWords = rightWords,
             totalLevels = engine.getTotalLevels(),
-            score = _uiState.value.score, // Keep accumulated score
+            score = if (resetScore) 0 else _uiState.value.score, // Keep accumulated score unless resetting
             gameState = MatchingGameState.Playing
         )
     }
@@ -200,8 +206,7 @@ class WordMatchingViewModel : ViewModel() {
      * Reset the game from the beginning.
      */
     fun resetGame() {
-        _uiState.value = WordMatchingUiState()
-        loadLevel(0)
+        loadLevel(0, resetScore = true)
     }
     
     /**
