@@ -164,11 +164,15 @@ PureWords1611 respects your privacy:
 
 - ✅ No personal information collected
 - ✅ No user accounts required
-- ✅ No tracking or analytics (optional)
+- ✅ Anonymous analytics for app improvement (Firebase Analytics)
 - ✅ All data stored locally on device
 - ✅ 100% free, no ads, no in-app purchases
 
 See our [Privacy Policy](docs/PRIVACY_POLICY.md) for complete details.
+
+## 📊 Analytics
+
+This app uses Firebase Analytics to track anonymous usage patterns and improve user experience. See [Analytics Setup Guide](docs/ANALYTICS_SETUP.md) for configuration details.
 
 ## 🛠️ Technology Stack
 
