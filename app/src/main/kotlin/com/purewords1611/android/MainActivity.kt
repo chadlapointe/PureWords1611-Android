@@ -8,9 +8,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.purewords1611.android.data.VerseRepository
+import com.purewords1611.android.ui.gameplay.GameplayScreen
 import com.purewords1611.android.ui.theme.PureWords1611Theme
+import com.purewords1611.android.viewmodel.GameViewModel
+import com.purewords1611.android.viewmodel.GameViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    DailyVerseScreen()
+                    GameScreen()
                 }
             }
         }
@@ -29,46 +33,21 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun DailyVerseScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Pure Words 1611",
-            style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-        ) {
-            Column(
-                modifier = Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "\"The words of the LORD are pure words: as silver tried in a furnace of earth, purified seven times.\"",
-                    style = MaterialTheme.typography.bodyLarge,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "- Psalm 12:6 (KJV)",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(onClick = { /* TODO: Implement share functionality */ }) {
-            Text("Share Verse")
-        }
-    }
+fun GameScreen() {
+    val context = LocalContext.current
+    val repository = remember { VerseRepository(context) }
+    
+    // Use viewModel() with factory for proper lifecycle management
+    val viewModel: GameViewModel = viewModel(
+        factory = GameViewModelFactory(repository)
+    )
+    val uiState by viewModel.uiState.collectAsState()
+    
+    GameplayScreen(
+        uiState = uiState,
+        onInputChange = { index, text -> viewModel.updateInput(index, text) },
+        onValidate = { viewModel.validateAnswer() },
+        onContinue = { viewModel.continueGame() },
+        onReset = { viewModel.resetGame() }
+    )
 }
