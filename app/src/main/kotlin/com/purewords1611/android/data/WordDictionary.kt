@@ -10,6 +10,11 @@ import kotlinx.coroutines.withContext
  */
 class WordDictionary(private val context: Context) {
     
+    companion object {
+        private const val TAG = "WordDictionary"
+        private const val MIN_WORD_LENGTH = 3
+    }
+    
     private var words: Set<String> = emptySet()
     
     /**
@@ -30,15 +35,15 @@ class WordDictionary(private val context: Context) {
                         .lowercase()
                         .replace(Regex("[^a-z ]"), "") // Remove punctuation
                         .split("\\s+".toRegex())
-                        .filter { it.length >= 3 } // Only words 3+ characters
+                        .filter { it.length >= MIN_WORD_LENGTH } // Only words 3+ characters
                     
                     allWords.addAll(verseWords)
                 }
                 
                 words = allWords
-                android.util.Log.d("WordDictionary", "Loaded ${words.size} unique words")
+                android.util.Log.d(TAG, "Loaded ${words.size} unique words")
             } catch (e: Exception) {
-                android.util.Log.e("WordDictionary", "Failed to load words", e)
+                android.util.Log.e(TAG, "Failed to load words", e)
                 words = getDefaultWords()
             }
         }

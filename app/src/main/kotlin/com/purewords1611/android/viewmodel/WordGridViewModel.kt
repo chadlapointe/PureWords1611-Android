@@ -32,7 +32,7 @@ data class WordGridUiState(
     val currentPath: List<GridPosition> = emptyList(),
     val foundWords: List<String> = emptyList(),
     val score: Int = 0,
-    val timeRemaining: Int = 120, // 2 minutes in seconds
+    val timeRemaining: Int = WordGridViewModel.INITIAL_TIME_SECONDS,
     val gameState: WordGridGameState = WordGridGameState.Loading,
     val feedback: String = ""
 )
@@ -43,6 +43,12 @@ data class WordGridUiState(
 class WordGridViewModel(
     private val wordDictionary: WordDictionary
 ) : ViewModel() {
+    
+    companion object {
+        private const val TAG = "WordGridViewModel"
+        const val INITIAL_TIME_SECONDS = 120 // 2 minutes
+        const val WIN_WORDS_REQUIRED = 10
+    }
     
     private val gameEngine = WordGameEngine(wordDictionary, gridSize = 4)
     
@@ -67,11 +73,11 @@ class WordGridViewModel(
                 _uiState.value = WordGridUiState(
                     grid = grid,
                     gameState = WordGridGameState.Playing,
-                    timeRemaining = 120
+                    timeRemaining = INITIAL_TIME_SECONDS
                 )
                 startTimer()
             } catch (e: Exception) {
-                android.util.Log.e("WordGridViewModel", "Failed to generate grid", e)
+                android.util.Log.e(TAG, "Failed to generate grid", e)
                 _uiState.value = _uiState.value.copy(
                     feedback = "Failed to start game",
                     gameState = WordGridGameState.Loading
@@ -153,7 +159,7 @@ class WordGridViewModel(
                 )
                 
                 // Check win condition (10+ unique words)
-                if (newFoundWords.size >= 10) {
+                if (newFoundWords.size >= WIN_WORDS_REQUIRED) {
                     stopTimer()
                     _uiState.value = _uiState.value.copy(
                         gameState = WordGridGameState.Victory,

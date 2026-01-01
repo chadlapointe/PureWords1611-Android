@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.purewords1611.android.data.GridPosition
 import com.purewords1611.android.viewmodel.WordGridGameState
 import com.purewords1611.android.viewmodel.WordGridUiState
+import com.purewords1611.android.viewmodel.WordGridViewModel
 
 /**
  * Main screen for the word grid game.
@@ -126,7 +127,7 @@ fun PlayingScreen(
         
         // Words found counter
         Text(
-            text = "Words Found: ${uiState.foundWords.size}/10",
+            text = "Words Found: ${uiState.foundWords.size}/${WordGridViewModel.WIN_WORDS_REQUIRED}",
             style = MaterialTheme.typography.titleMedium
         )
         

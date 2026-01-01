@@ -8,19 +8,25 @@ import kotlin.random.Random
  */
 class WordGameEngine(
     private val wordDictionary: WordDictionary,
-    private val gridSize: Int = 4
+    private val gridSize: Int = DEFAULT_GRID_SIZE
 ) {
     
-    /**
-     * Common letters in English, weighted by frequency for better gameplay.
-     * Vowels and common consonants appear more often.
-     */
-    private val commonLetters = listOf(
-        'e', 'e', 'e', 'a', 'a', 'a', 'i', 'i', 'o', 'o', 
-        't', 't', 'n', 'n', 's', 's', 'r', 'r', 'h', 'h',
-        'l', 'l', 'd', 'd', 'c', 'c', 'u', 'u', 'm', 'm',
-        'p', 'f', 'g', 'w', 'y', 'b', 'v', 'k', 'j', 'x', 'z', 'q'
-    )
+    companion object {
+        const val DEFAULT_GRID_SIZE = 4
+        const val MAX_PATH_LENGTH = 8
+        
+        /**
+         * Common letters in English, weighted by frequency for better gameplay.
+         * Vowels and common consonants appear more often.
+         * Each letter appears N times in the list based on its frequency weight.
+         */
+        private val COMMON_LETTERS = listOf(
+            'e', 'e', 'e', 'a', 'a', 'a', 'i', 'i', 'o', 'o', 
+            't', 't', 'n', 'n', 's', 's', 'r', 'r', 'h', 'h',
+            'l', 'l', 'd', 'd', 'c', 'c', 'u', 'u', 'm', 'm',
+            'p', 'f', 'g', 'w', 'y', 'b', 'v', 'k', 'j', 'x', 'z', 'q'
+        )
+    }
     
     /**
      * Generate a new word grid using common letters.
@@ -30,7 +36,7 @@ class WordGameEngine(
         // Generate random letters
         val letters = List(gridSize) { _ ->
             List(gridSize) { _ ->
-                commonLetters.random().uppercaseChar()
+                COMMON_LETTERS.random().uppercaseChar()
             }
         }
         
@@ -118,7 +124,7 @@ class WordGameEngine(
         foundWords: MutableSet<String>
     ) {
         // Limit path length to avoid excessive recursion
-        if (currentPath.size > 8) return
+        if (currentPath.size > MAX_PATH_LENGTH) return
         
         val word = grid.getWordFromPath(currentPath).lowercase()
         
