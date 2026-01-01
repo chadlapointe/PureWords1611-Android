@@ -10,7 +10,7 @@ The PureWords1611 Android app features a word-based game where players fill in m
 Players must correctly fill in the blanks in Bible verses to score points while managing a limited number of lives.
 
 ### Rules
-- **Starting Lives**: 3 lives (displayed as hearts ❤️)
+- **Starting Lives**: 3 lives (displayed as "Lives: X/3")
 - **Scoring**: +10 points for each correct answer
 - **Lives Lost**: -1 life for each incorrect answer
 - **Game Over**: When all lives are lost
@@ -38,7 +38,7 @@ Players must correctly fill in the blanks in Bible verses to score points while 
 ┌────────────────────────────────────────────────────────────────┐
 │                      Playing Screen                             │
 │  ┌──────────────────────────────────────────────────────────┐  │
-│  │  Score: XX                          Lives: ❤️❤️❤️         │  │
+│  │  Score: XX                          Lives: 3/3            │  │
 │  └──────────────────────────────────────────────────────────┘  │
 │  ┌──────────────────────────────────────────────────────────┐  │
 │  │  Reference: Genesis 1:1                                   │  │

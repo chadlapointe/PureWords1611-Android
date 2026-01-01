@@ -193,7 +193,7 @@ fun FeedbackScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = if (isCorrect) "✓ Correct!" else "✗ Incorrect",
+                    text = if (isCorrect) "Correct!" else "Incorrect",
                     style = MaterialTheme.typography.headlineMedium,
                     textAlign = TextAlign.Center
                 )
