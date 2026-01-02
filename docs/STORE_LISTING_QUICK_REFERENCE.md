@@ -122,7 +122,10 @@ Encrypted in transit: YES
 ```
 YOUR_EMAIL_HERE
 ```
-**Suggested**: `chadlapointe+purewords1611@gmail.com`
+**Suggested**: 
+- `chadlapointe+purewords1611@gmail.com` (Gmail with label - note: some systems may not support + addressing)
+- `chadlapointe.purewords@gmail.com` (Gmail alias alternative)
+- `support@purewords1611.com` (Custom domain)
 
 ### Privacy Policy URL (Required - HTTPS)
 ```

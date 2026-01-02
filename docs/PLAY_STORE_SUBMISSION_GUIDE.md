@@ -137,6 +137,10 @@ Simple but mixes personal and app support.
 
 4. **Your privacy policy URL will be**:
    ```
+   https://chadlapointe.github.io/PureWords1611-Android/privacy-policy.html
+   ```
+   Or if you named the file `index.html`:
+   ```
    https://chadlapointe.github.io/PureWords1611-Android/
    ```
 
@@ -401,10 +405,11 @@ Before clicking "Submit for Review", verify:
 ### Project Documentation
 - **Main README**: `../README.md`
 - **Store Listing Draft**: `PLAY_CONSOLE_APP_LISTING_DRAFT.md`
+- **Store Listing Quick Reference**: `STORE_LISTING_QUICK_REFERENCE.md`
 - **Assets Guide**: `ASSETS_GUIDE.md`
 - **Privacy Policy Template**: `PRIVACY_POLICY.md`
 - **Setup Guide**: `GOOGLE_PLAY_SETUP.md`
-- **Quick Reference**: `QUICK_REFERENCE.md`
+- **Quick Reference Card**: `QUICK_REFERENCE.md`
 
 ### External Resources
 - **Graphic Design**: Canva.com, Figma.com
