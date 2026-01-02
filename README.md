@@ -202,15 +202,18 @@ This app uses Firebase Analytics to track anonymous usage patterns and improve u
 
 ## 🛠️ Technology Stack
 
-- **Language**: Kotlin
-- **Minimum SDK**: API 21 (Android 5.0 Lollipop)
+- **Language**: Kotlin 1.9.20
+- **Minimum SDK**: API 24 (Android 7.0)
 - **Target SDK**: API 34 (Android 14)
-- **Architecture**: MVVM (Model-View-ViewModel)
-- **Database**: Room (SQLite)
-- **Dependency Injection**: Hilt/Koin (TBD)
-- **Networking**: Retrofit + OkHttp (for verse downloads)
-- **Async Operations**: Kotlin Coroutines
-- **UI**: Material Design Components
+- **Architecture**: MVVM (Model-View-ViewModel) with Hilt DI
+- **UI Framework**: Jetpack Compose with Material Design 3
+- **Dependency Injection**: Hilt (Dagger) ✅
+- **Database**: Room (configured, ready for implementation)
+- **Networking**: Retrofit + OkHttp (for future verse downloads)
+- **Async Operations**: Kotlin Coroutines + Flow
+- **Analytics**: Firebase Analytics ✅
+
+For detailed architecture and structure, see [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md).
 
 ## 🤝 Contributing
 

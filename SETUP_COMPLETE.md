@@ -46,14 +46,14 @@ PureWords1611-Android/
 - **Language**: Kotlin 1.9.20
 - **Build System**: Gradle 8.7
 - **Android Gradle Plugin**: 8.1.4
-- **Minimum SDK**: API 21 (Android 5.0 Lollipop)
+- **Minimum SDK**: API 24 (Android 7.0)
 - **Target SDK**: API 34 (Android 14)
 - **UI Framework**: Jetpack Compose with Material Design 3
-- **Architecture**: MVVM (Model-View-ViewModel)
-- **Database**: Room (SQLite)
-- **Async Operations**: Kotlin Coroutines
+- **Architecture**: MVVM (Model-View-ViewModel) with Hilt Dependency Injection
+- **Database**: Room (SQLite) - configured, ready for implementation
+- **Async Operations**: Kotlin Coroutines + Flow
 - **Background Tasks**: WorkManager
-- **Dependency Injection**: KSP (ready for Hilt/Koin integration)
+- **Dependency Injection**: Hilt (Dagger) ✅ **IMPLEMENTED**
 
 ### Key Features Configured
 
@@ -63,11 +63,18 @@ PureWords1611-Android/
    - Dynamic color support (Android 12+)
    - Light and dark theme support
 
-2. **Data Persistence**:
-   - Room database setup
+2. **Dependency Injection** ✅:
+   - Hilt (Dagger) fully integrated
+   - Application class with @HiltAndroidApp
+   - Activity with @AndroidEntryPoint
+   - ViewModels with @HiltViewModel
+   - Dependency modules (AppModule, DataModule)
+
+3. **Data Persistence**:
+   - Room database configured (ready for implementation)
    - Kotlin Coroutines for async operations
 
-3. **Testing**:
+4. **Testing**:
    - Unit test structure with JUnit
    - Instrumented test structure with AndroidJUnit4
    - Compose UI testing support
@@ -99,6 +106,10 @@ PureWords1611-Android/
 - `androidx.room:room-ktx:2.6.1`
 - `org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3`
 - `androidx.work:work-runtime-ktx:2.9.0`
+
+#### Hilt Dependency Injection ✅
+- `com.google.dagger:hilt-android:2.51.1`
+- `androidx.hilt:hilt-navigation-compose:1.2.0`
 
 #### Testing
 - `junit:junit:4.13.2`

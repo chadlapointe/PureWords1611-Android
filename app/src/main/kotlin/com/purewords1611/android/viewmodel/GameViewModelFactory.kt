@@ -6,7 +6,14 @@ import com.purewords1611.android.data.VerseRepository
 
 /**
  * Factory for creating GameViewModel with required dependencies.
+ * 
+ * @deprecated Use Hilt dependency injection with @HiltViewModel instead.
+ * This factory is maintained for backward compatibility but is no longer needed.
  */
+@Deprecated(
+    message = "Use Hilt dependency injection with @HiltViewModel and hiltViewModel() composable instead",
+    replaceWith = ReplaceWith("hiltViewModel()", "androidx.hilt.navigation.compose.hiltViewModel")
+)
 class GameViewModelFactory(
     private val repository: VerseRepository
 ) : ViewModelProvider.Factory {
