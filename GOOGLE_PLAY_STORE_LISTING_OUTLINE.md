@@ -882,9 +882,10 @@ bundletool install-apks --apks=app-release.apks
 
 ### For App Support
 - **Developer Email**: ⚠️ **TODO: Set up and enter support email before submission**
-  - Suggested: `support@purewords1611.com` or `chadlapointe+purewords@gmail.com`
-- **Repository**: https://github.com/chadlapointe/PureWords1611-Android
-- **Issues**: https://github.com/chadlapointe/PureWords1611-Android/issues
+  - Options: Domain-based email (e.g., support@yourdomain.com) or Gmail with filtering
+  - **Security Note**: Avoid publicly exposing personal email addresses
+- **Repository**: See project README for current repository information
+- **Issues**: Use GitHub Issues in the project repository
 
 ### For Play Store Help
 - **Play Console Support**: https://support.google.com/googleplay/android-developer/
