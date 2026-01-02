@@ -115,19 +115,27 @@ Simple but mixes personal and app support.
    ```
 
 2. **Convert to HTML**:
-   - Use online Markdown to HTML converter
-   - Or use: `pandoc PRIVACY_POLICY.md -o privacy-policy.html`
+   - Use online Markdown to HTML converter (e.g., markdowntohtml.com)
+   - Save the output as `privacy-policy.html`
+   - Or use command line: `pandoc docs/PRIVACY_POLICY.md -o privacy-policy.html`
+   - The output file should be named `privacy-policy.html` or `index.html`
 
 3. **Host on GitHub Pages** (Free & Easy):
    ```bash
    # Create gh-pages branch
    git checkout -b gh-pages
    
-   # Add privacy policy HTML file
+   # Add privacy policy HTML file (use the filename from step 2)
+   # If your file is named privacy-policy.html:
+   cp privacy-policy.html privacy-policy.html
+   git add privacy-policy.html
+   
+   # OR if you prefer index.html (makes URL shorter):
    cp privacy-policy.html index.html
+   git add index.html
    
    # Commit and push
-   git add index.html
+   git commit -m "Add privacy policy for Play Store"
    git commit -m "Add privacy policy for Play Store"
    git push origin gh-pages
    
@@ -203,8 +211,19 @@ versionCode = 1
 versionName = "1.0.0"
 
 # 2. Create release keystore (FIRST TIME ONLY)
+# Use a STRONG password - you'll need it for every release!
 keytool -genkey -v -keystore release.keystore -alias purewords1611 \
-  -keyalg RSA -keysize 2048 -validity 10000
+  -keyalg RSA -keysize 2048 -validity 10000 -storetype PKCS12
+
+# You'll be prompted for:
+# - Keystore password (choose a STRONG password - save it securely!)
+# - Your name and organizational details
+# - Key password (can be same as keystore password)
+
+# ⚠️ CRITICAL: Store this keystore file and password SECURELY
+# - Back up to multiple secure locations
+# - You can NEVER recover or change this keystore
+# - Losing it means you can't update your app on Play Store
 
 # 3. Configure signing in app/build.gradle.kts or gradle.properties
 
