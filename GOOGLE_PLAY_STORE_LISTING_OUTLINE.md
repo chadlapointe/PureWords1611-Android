@@ -11,6 +11,18 @@
 
 This document provides a comprehensive, structured outline of all content and requirements for the PureWords1611 Google Play Store listing. It consolidates information from multiple documentation sources into a single, actionable reference for the store submission process.
 
+### ⚠️ IMPORTANT NOTES
+
+**App Description Alignment**: The existing store listing documents (STORE_LISTING.md, PLAY_CONSOLE_APP_LISTING_DRAFT.md) describe a "daily verse devotional" app with features like daily notifications, verse sharing, and bookmarking. However, **the actual implemented app is a word game app** with three game modes (Verse Challenge, Word Grid, Word Matching). 
+
+**Action Required Before Submission**:
+- [ ] Update store descriptions to accurately reflect the word game focus
+- [ ] Remove references to daily verse delivery, notifications, sharing, and bookmarking features
+- [ ] Emphasize the three game modes and educational gameplay aspects
+- [ ] Ensure all feature claims match actual implementation
+
+This outline references both the existing store listing templates and the actual app features. Review carefully and use the actual implemented features when creating your final store listing.
+
 ### Quick Navigation
 - [App Identity](#-1-app-identity)
 - [Store Listing Content](#-2-store-listing-content)
@@ -50,91 +62,155 @@ com.purewords1611.android
 ### 2.1 Short Description
 **Character Limit**: 80 characters
 
-**Primary Version** (57/80 chars):
+**Recommended for Word Game App** (actual implementation):
+```
+Engaging Bible word games with KJV 1611 vocabulary - three game modes
+```
+**Character Count**: 69 / 80
+
+**Alternative Version 1**:
+```
+Learn KJV Bible vocabulary through fun word games - three modes to play
+```
+**Character Count**: 73 / 80
+
+**Alternative Version 2**:
+```
+Interactive word games featuring authentic 1611 King James Bible vocabulary
+```
+**Character Count**: 75 / 80
+
+---
+
+**From Existing Template** (describes different app concept):
 ```
 Daily KJV Bible verses from the 1611 King James Version
 ```
-
-**Key Elements**:
-- ✅ Mentions "Daily" (frequency/engagement)
-- ✅ Includes "KJV" (primary keyword)
-- ✅ Specifies "1611" (authenticity/differentiation)
-- ✅ Under character limit with room to spare
-
-**Alternative Options**:
-1. "Start each day with pure scripture from the 1611 King James Bible" (69 chars)
-2. "Authentic 1611 KJV verses delivered daily to your device - free and ad-free" (77 chars)
+**Character Count**: 57 / 80  
+⚠️ **Note**: This describes a daily devotional app, not the actual word game implementation.
 
 ### 2.2 Full Description
-**Character Limit**: 4000 characters  
-**Current Length**: ~2,450 characters
+**Character Limit**: 4000 characters
 
-**Structure Outline**:
+⚠️ **CRITICAL**: The existing template (from PLAY_CONSOLE_APP_LISTING_DRAFT.md) describes a daily devotional app with features NOT present in the actual implementation. Use the revised version below that accurately reflects the word game app.
 
-#### Introduction (Hook)
-- Opening line: App purpose and value proposition
-- Reference to 1611 KJV authenticity
+**Recommended Full Description for Word Game App**:
 
-#### Features Section (✨ FEATURES)
-Organized with emoji icons for visual scanning:
-1. 📖 **Authentic 1611 KJV Text** - Translation quality and accuracy
-2. 📅 **Daily Verse Delivery** - Core functionality
-3. 🙏 **Simple and Clean Interface** - User experience focus
-4. 💾 **Offline Access** - Technical capability
-5. 🔔 **Daily Notifications** - Engagement feature (optional)
-6. 📤 **Share Verses** - Social/viral feature
-7. ⭐ **Favorite Verses** - Bookmarking functionality
-8. 🌙 **Dark Mode** - Accessibility feature
+```
+PureWords1611 - Learn Bible Vocabulary Through Engaging Word Games
 
-#### Why 1611 KJV Section (🎯 WHY 1611 KJV?)
-- Historical significance (400+ years)
-- Translation accuracy
-- Poetic language quality
-- Faithful preservation
+Test your knowledge of the King James Version Bible through three exciting word game modes! PureWords1611 combines educational gameplay with authentic 1611 KJV vocabulary for an engaging learning experience.
 
-#### Use Cases Section (💡 PERFECT FOR)
-Target audience identification:
-- Personal daily devotions
-- Morning/evening meditation
-- Scripture memorization
-- Spiritual growth
-- Sharing with others
-- Biblical truth seekers
+✨ THREE GAME MODES
 
-#### About Section (📜 ABOUT PURE WORDS 1611)
-- Mission statement
-- Scripture reference (Psalm 12:6)
-- Core values
+📝 Verse Challenge
+Fill in the missing words from authentic Bible verses. Start with 3 lives and test your scripture knowledge. Earn 10 points for each correct answer. How many verses can you complete?
 
-#### Privacy Section (🔐 YOUR PRIVACY MATTERS)
-Trust builders:
-- No personal information collected
-- No user accounts required
-- No tracking/analytics
-- Local data storage only
-- 100% free, no ads, no IAP
+🔤 Word Grid
+Find words in a 4x4 letter grid, Boggle-style! Connect adjacent letters to build words from KJV vocabulary. Race against a 2-minute timer to find 10 or more words and win. Earn bonus points for longer words!
 
-#### Call to Action
-- Download encouragement
-- Scripture reference (Psalm 119:105)
-- Contact information
-- Review request
+🔗 Word Matching
+Match related biblical words across 5 progressive levels. Learn synonyms, antonyms, and related concepts from scripture. Complete all pairs with zero mistakes to earn a perfect bonus!
 
-**Required Customizations**:
+🎯 KEY FEATURES
+
+📚 Authentic 1611 KJV Vocabulary
+All words and verses come from the genuine 1611 King James Version, preserving the beauty and accuracy of this historic translation.
+
+🎮 Educational Gameplay
+Learn Bible vocabulary naturally through engaging, interactive games. Perfect for scripture memorization and improving your biblical knowledge.
+
+💾 100% Offline
+No internet connection required! All game content is included with the app. Play anytime, anywhere.
+
+🎨 Beautiful Modern Design
+Clean Material Design 3 interface with light and dark theme options. Smooth animations and intuitive controls.
+
+📊 Score Tracking
+Lives system, point scoring, and progressive difficulty keep you challenged and engaged.
+
+🔒 Privacy-First
+No personal data collected. No user accounts required. No tracking or analytics. All your progress stays on your device.
+
+💰 Completely Free
+100% free with no advertisements, no in-app purchases, and no hidden costs. We believe learning God's Word should be accessible to everyone.
+
+💡 PERFECT FOR
+
+✝️ Scripture students wanting to test their Bible knowledge
+✝️ Word game enthusiasts who enjoy puzzle challenges  
+✝️ Christian educators looking for engaging teaching tools
+✝️ Anyone wanting to learn KJV vocabulary in a fun way
+✝️ Families seeking quality, faith-based gaming
+
+📜 ABOUT THE 1611 KJV
+
+The King James Version Bible, completed in 1611, has been the gold standard for English Bible translations for over 400 years. Known for its accurate translation from original texts and beautiful, poetic language that has inspired generations.
+
+"The words of the LORD are pure words: as silver tried in a furnace of earth, purified seven times." - Psalm 12:6 (KJV)
+
+🎓 LEARN WHILE YOU PLAY
+
+Each game mode teaches biblical vocabulary in a different way:
+- Verse Challenge improves scripture memorization
+- Word Grid expands vocabulary recognition
+- Word Matching teaches word relationships and concepts
+
+Start your biblical vocabulary journey today with PureWords1611!
+
+---
+
+📧 SUPPORT
+Questions or feedback? Contact us at YOUR_SUPPORT_EMAIL_HERE
+
+⭐ ENJOYING THE APP?
+Please leave a review and share with fellow believers!
+```
+
+**Character Count**: ~2,700 / 4,000
+
+**Required Before Submission**:
 - [ ] Replace `YOUR_SUPPORT_EMAIL_HERE` with actual support email
-- [ ] Verify all features listed match actual app capabilities
-- [ ] Update character count if content is modified
+- [ ] Review and adjust based on final app features
+- [ ] Verify all claimed features are implemented
+- [ ] Test character count is within limit
+
+---
+
+**Reference: Old Template Structure** (from existing docs - describes different app):
+The existing store listing documents describe a devotional app with daily verses, notifications, sharing, and bookmarking. These features are NOT implemented in the current app. The structure above provides accurate content for the actual word game implementation.
 
 ### 2.3 Promotional Text
-**Character Limit**: 170 characters  
-**Current Length**: 150 characters (OPTIONAL)
+**Character Limit**: 170 characters (OPTIONAL)
 
+This appears at the top of your store listing for users who haven't installed yet.
+
+**Recommended for Word Game App**:
+```
+Learn Bible vocabulary through fun word games! Three modes: Verse Challenge, Word Grid, and Word Matching. 100% free, no ads. KJV 1611.
+```
+**Character Count**: 146 / 170
+
+**Alternative Version 1**:
+```
+Test your KJV Bible knowledge with engaging word games! Fill in verses, find words in grids, match biblical terms. Free, no ads, offline play.
+```
+**Character Count**: 152 / 170
+
+**Alternative Version 2**:
+```
+Three engaging Bible word games in one app! Learn KJV 1611 vocabulary through interactive gameplay. Completely free with no ads. Play offline!
+```
+**Character Count**: 150 / 170
+
+---
+
+**From Existing Template** (describes different app):
 ```
 Daily KJV Bible verses from the authentic 1611 translation. Start each day with God's pure Word. 100% free, no ads, always accessible.
 ```
-
-**Purpose**: Appears at top of store listing for non-installed users  
-**Note**: This is an optional field but recommended for better conversion
+**Character Count**: 150 / 170  
+⚠️ **Note**: This describes a daily devotional app, not the actual word game implementation.
 
 ---
 
@@ -459,11 +535,13 @@ Thank you for downloading! May God's Word bless you daily.
 ### 6.3 Build Configuration
 **Release Build Requirements**:
 - Signed with release keystore
-- ProGuard/R8 enabled for code optimization
+- ProGuard/R8 enabled for code optimization (configured in build.gradle.kts)
 - Minified and obfuscated
 - AAB (Android App Bundle) format
-- Target SDK: 34 (Android 14)
-- Minimum SDK: 24 (Android 7.0)
+- **Target SDK: 34** (Android 14) - ✅ Verified in app/build.gradle.kts
+- **Minimum SDK: 24** (Android 7.0) - ✅ Verified in app/build.gradle.kts
+- **Version Code: 1** - ✅ Configured in build.gradle.kts
+- **Version Name: 1.0.0** - ✅ Configured in build.gradle.kts
 
 **Build Commands**:
 ```bash
@@ -797,12 +875,14 @@ bundletool install-apks --apks=app-release.apks
 ## 📞 Contact & Support
 
 ### For This Document
-- **Maintained By**: GitHub Copilot Coding Agent
+- **Document Owner**: Project maintainer (see repository)
+- **Created By**: GitHub Copilot Coding Agent on January 2, 2026
 - **Last Review Date**: January 2, 2026
 - **Next Review**: After first submission (update with lessons learned)
 
 ### For App Support
-- **Developer Email**: [To be set up]
+- **Developer Email**: ⚠️ **TODO: Set up and enter support email before submission**
+  - Suggested: `support@purewords1611.com` or `chadlapointe+purewords@gmail.com`
 - **Repository**: https://github.com/chadlapointe/PureWords1611-Android
 - **Issues**: https://github.com/chadlapointe/PureWords1611-Android/issues
 
