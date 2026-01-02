@@ -317,10 +317,23 @@ Read and engage with daily Bible verses for spiritual growth.
 
 ### Core Data Entities
 
+#### Data Persistence Strategy
+
+| Entity | Storage Type | Location | Reason |
+|--------|-------------|----------|---------|
+| Verse | Asset File | `assets/verses.json` | Static content, no user modifications |
+| DailyVerse | Room Database | `daily_verses` table | User interactions (bookmarks, read status) |
+| WordGrid | Runtime | Memory only | Generated per game, no persistence needed |
+| WordPair | Asset File | `assets/word_pairs.json` | Static content (future implementation) |
+| GameSession | Room Database | `game_sessions` table | User gameplay history (future) |
+| UserStats | Room Database | `user_stats` table | Aggregate statistics (future) |
+
+---
+
 #### 1. Verse
 Primary entity for bible verse content.
 
-**Table**: `verses` (Asset JSON, not database)
+**Storage**: Asset file `assets/verses.json` (JSON, not database)
 
 | Field | Type | Description | Example |
 |-------|------|-------------|---------|
@@ -389,7 +402,9 @@ date       | reference  | text                          | isBookmarked | isRead
 #### 3. WordGrid
 Represents letter grid for word search game.
 
-**Data Class** (Runtime only, not persisted):
+**Storage**: Runtime generated (ephemeral, not persisted)
+
+**Data Class**:
 ```kotlin
 data class WordGrid(
     val size: Int = 4,
@@ -424,7 +439,9 @@ WordGrid(
 #### 4. WordPair
 Biblical term and definition pairs for matching game.
 
-**Data Class** (Asset JSON, not database):
+**Storage**: Asset file `assets/word_pairs.json` (JSON, not database - Future)
+
+**Data Class**:
 ```kotlin
 data class WordPair(
     val word: String,
