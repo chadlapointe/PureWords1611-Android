@@ -8,32 +8,41 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.purewords1611.android.analytics.AnalyticsManager
-import com.purewords1611.android.data.VerseRepository
-import com.purewords1611.android.data.WordDictionary
 import com.purewords1611.android.ui.GameModeSelectionScreen
 import com.purewords1611.android.ui.gameplay.GameplayScreen
 import com.purewords1611.android.ui.wordgrid.WordGridGameScreen
 import com.purewords1611.android.ui.wordmatching.WordMatchingGameScreen
 import com.purewords1611.android.ui.theme.PureWords1611Theme
 import com.purewords1611.android.viewmodel.GameViewModel
-import com.purewords1611.android.viewmodel.GameViewModelFactory
 import com.purewords1611.android.viewmodel.WordGridViewModel
-import com.purewords1611.android.viewmodel.WordGridViewModelFactory
 import com.purewords1611.android.viewmodel.WordMatchingViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+/**
+ * Main activity for PureWords1611 app
+ * Uses Hilt for dependency injection
+ */
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    
+    @Inject
+    lateinit var analyticsManager: AnalyticsManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Track app launch
+        analyticsManager.trackAppLaunch()
+        
         setContent {
             PureWords1611Theme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GameScreen()
+                    GameScreen(analyticsManager)
                 }
             }
         }
@@ -48,9 +57,7 @@ enum class GameMode {
 }
 
 @Composable
-fun GameScreen() {
-    val context = LocalContext.current
-    val analyticsManager = remember { AnalyticsManager.getInstance(context) }
+fun GameScreen(analyticsManager: AnalyticsManager) {
     var currentMode by remember { mutableStateOf(GameMode.MENU) }
     
     // Track screen views when mode changes
@@ -109,12 +116,7 @@ fun GameScreen() {
 
 @Composable
 fun VerseGameScreen(onBackToMenu: () -> Unit) {
-    val context = LocalContext.current
-    val repository = remember { VerseRepository(context) }
-    
-    val viewModel: GameViewModel = viewModel(
-        factory = GameViewModelFactory(repository)
-    )
+    val viewModel: GameViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     
     Scaffold(
@@ -142,12 +144,7 @@ fun VerseGameScreen(onBackToMenu: () -> Unit) {
 
 @Composable
 fun WordGridScreen(onBackToMenu: () -> Unit) {
-    val context = LocalContext.current
-    val wordDictionary = remember { WordDictionary(context) }
-    
-    val viewModel: WordGridViewModel = viewModel(
-        factory = WordGridViewModelFactory(wordDictionary)
-    )
+    val viewModel: WordGridViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     
     Scaffold(
@@ -175,7 +172,7 @@ fun WordGridScreen(onBackToMenu: () -> Unit) {
 
 @Composable
 fun WordMatchingScreen(onBackToMenu: () -> Unit) {
-    val viewModel: WordMatchingViewModel = viewModel()
+    val viewModel: WordMatchingViewModel = hiltViewModel()
     val uiState by viewModel.uiState.collectAsState()
     
     Scaffold(

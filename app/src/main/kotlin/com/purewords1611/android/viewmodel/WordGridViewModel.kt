@@ -6,12 +6,14 @@ import com.purewords1611.android.data.GridPosition
 import com.purewords1611.android.data.WordDictionary
 import com.purewords1611.android.data.WordGameEngine
 import com.purewords1611.android.data.WordGrid
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Game states for the word grid game.
@@ -39,8 +41,10 @@ data class WordGridUiState(
 
 /**
  * ViewModel for the word grid game.
+ * Uses Hilt for dependency injection.
  */
-class WordGridViewModel(
+@HiltViewModel
+class WordGridViewModel @Inject constructor(
     private val wordDictionary: WordDictionary
 ) : ViewModel() {
     
