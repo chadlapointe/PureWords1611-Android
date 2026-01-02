@@ -1,12 +1,14 @@
-# PureWords1611 - Daily KJV Bible Verses
+# PureWords1611 - Word-Based Bible Games
 
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](https://developer.android.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-setup_complete-blue.svg)](SETUP_COMPLETE.md)
 
-**Pure Words 1611** is an Android application that delivers daily Bible verses from the authentic 1611 King James Version. Start each day with God's Word, conveniently accessible on your mobile device.
+**PureWords1611** is an engaging Android word game application featuring three distinct game modes based on King James Version (KJV 1611) Bible vocabulary. Learn scripture through interactive gameplay!
 
-> **📱 Project Status**: Android project structure is complete! See [SETUP_COMPLETE.md](SETUP_COMPLETE.md) for details.
+> **📱 Project Status**: Implementation complete! Three game modes ready for testing.
+>
+> **🎮 Game Modes**: Verse Challenge, Word Grid, and Word Matching
 >
 > ⚠️ **Note**: Build requires Maven repository access. See [BUILD_ENVIRONMENT_ISSUE.md](BUILD_ENVIRONMENT_ISSUE.md) for details.
 
@@ -14,14 +16,34 @@
 
 > "The words of the LORD are pure words: as silver tried in a furnace of earth, purified seven times." - Psalm 12:6 (KJV)
 
-PureWords1611 brings the timeless wisdom of the 1611 King James Bible to your Android device with a fresh verse delivered daily. The app features:
+PureWords1611 provides engaging, educational word games centered on KJV 1611 Bible vocabulary. The app features three unique game modes:
 
-- 📅 Daily verse delivery from the 1611 KJV
-- 💾 Offline access to verses
-- 🔔 Optional daily notifications
-- ⭐ Bookmark favorite verses
-- 📤 Share verses with others
-- 🌙 Light and dark theme support
+### 🎮 Game Modes
+
+1. **📝 Verse Challenge** - Fill in the missing words from Bible verses
+   - 3 lives system
+   - +10 points per correct answer
+   - Test your scripture knowledge
+
+2. **🔤 Word Grid** - Find words in a 4x4 letter grid (Boggle-style)
+   - 2-minute timer
+   - +10 base points + length bonuses
+   - Find 10+ words to win
+
+3. **🔗 Word Matching** - Match related biblical words
+   - 5 progressive levels
+   - +10 points per match, +50 perfect bonus
+   - Synonyms, antonyms, and related terms
+
+### ✨ App Features
+
+- 🎯 Three distinct game modes for variety
+- 📚 KJV 1611 authentic vocabulary
+- 💾 100% offline - no internet required
+- 🔒 Privacy-first - no personal data collected
+- 🎨 Material Design 3 modern UI
+- ♿ Accessibility-friendly design
+- 📊 Score tracking and progression
 
 ## 🚀 Getting Started
 
@@ -60,7 +82,19 @@ cd PureWords1611-Android
 
 This repository includes comprehensive documentation for setting up and publishing the app to the Google Play Store.
 
-### 🎯 Start Here - Complete Setup Summary
+### 🎯 Start Here - Game & Feature Documentation
+
+**📋 [FEATURE SET DEFINITION](FEATURE_SET_DEFINITION.md)** - ⭐ **MASTER DOCUMENT!** Complete feature set definition for all three game modes
+
+**🔄 [GAME LOOP ARCHITECTURE](GAME_LOOP_ARCHITECTURE.md)** - 🏗️ **TECHNICAL SPECS!** Detailed game loop architecture and state machines
+
+**🎮 [GAMEPLAY DOCUMENTATION](GAMEPLAY_DOCUMENTATION.md)** - 📖 Verse Challenge gameplay mechanics
+
+**🔤 [WORD GRID GAME MECHANICS](WORD_GRID_GAME_MECHANICS.md)** - 🎯 Word Grid gameplay and implementation
+
+**🔗 [WORD MATCHING IMPLEMENTATION](WORD_MATCHING_IMPLEMENTATION.md)** - 🎪 Word Matching game details
+
+### 🎯 Google Play Store Setup
 
 **🚀 [Play Store Submission Guide](docs/PLAY_STORE_SUBMISSION_GUIDE.md)** - ⭐ **NEW! COMPLETE GUIDE!** Everything you need to submit to Google Play Store
 
@@ -88,6 +122,8 @@ These documents provide:
 
 #### Planning & Concept
 - **[App Concept & Feature List](docs/APP_CONCEPT.md)** - 📱 Complete app concept definition, feature roadmap, user personas, and technical architecture
+- **[Feature Set Definition](FEATURE_SET_DEFINITION.md)** - 🎮 **MASTER REFERENCE** for all game modes and features
+- **[Game Loop Architecture](GAME_LOOP_ARCHITECTURE.md)** - 🏗️ Technical specifications for core game loops
 
 #### Play Store Setup Guides
 - **[Play Store Submission Guide](docs/PLAY_STORE_SUBMISSION_GUIDE.md)** - 🚀 **NEW! COMPLETE WORKFLOW**: End-to-end submission guide with all details
