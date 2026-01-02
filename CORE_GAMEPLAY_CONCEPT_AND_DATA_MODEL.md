@@ -367,7 +367,7 @@ data class Verse(
 #### 2. DailyVerse
 Tracks daily verse delivery and user interaction.
 
-**Table**: `daily_verses` (Room Database)
+**Storage**: Room Database table `daily_verses`
 
 | Field | Type | Description | Constraints |
 |-------|------|-------------|-------------|
@@ -471,7 +471,7 @@ data class WordPair(
 #### 5. GameSession
 Tracks individual game play sessions.
 
-**Table**: `game_sessions` (Room Database - Future)
+**Storage**: Room Database table `game_sessions` (Future Implementation)
 
 | Field | Type | Description |
 |-------|------|-------------|
@@ -500,7 +500,7 @@ data class GameSessionEntity(
 #### 6. UserStats
 Aggregate statistics per game mode.
 
-**Table**: `user_stats` (Room Database - Future)
+**Storage**: Room Database table `user_stats` (Future Implementation)
 
 | Field | Type | Description |
 |-------|------|-------------|
