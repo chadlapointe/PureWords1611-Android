@@ -96,9 +96,11 @@ This repository includes comprehensive documentation for setting up and publishi
 
 ### 🎯 Google Play Store Setup
 
-**🚀 [Play Store Submission Guide](docs/PLAY_STORE_SUBMISSION_GUIDE.md)** - ⭐ **NEW! COMPLETE GUIDE!** Everything you need to submit to Google Play Store
+**📋 [GOOGLE PLAY STORE LISTING OUTLINE](GOOGLE_PLAY_STORE_LISTING_OUTLINE.md)** - ⭐ **MASTER OUTLINE!** Comprehensive strategic guide for store listing submission
 
-**📋 [Store Listing Quick Reference](docs/STORE_LISTING_QUICK_REFERENCE.md)** - ⚡ **NEW! ONE-PAGE!** Quick copy-paste reference card
+**🚀 [Play Store Submission Guide](docs/PLAY_STORE_SUBMISSION_GUIDE.md)** - ⭐ **COMPLETE GUIDE!** Everything you need to submit to Google Play Store
+
+**📋 [Store Listing Quick Reference](docs/STORE_LISTING_QUICK_REFERENCE.md)** - ⚡ **ONE-PAGE!** Quick copy-paste reference card
 
 **🚀 [Getting Started Guide](docs/GETTING_STARTED.md)** - Your navigation guide - pick your path and begin
 
@@ -126,16 +128,17 @@ These documents provide:
 - **[Game Loop Architecture](GAME_LOOP_ARCHITECTURE.md)** - 🏗️ Technical specifications for core game loops
 
 #### Play Store Setup Guides
-- **[Play Store Submission Guide](docs/PLAY_STORE_SUBMISSION_GUIDE.md)** - 🚀 **NEW! COMPLETE WORKFLOW**: End-to-end submission guide with all details
-- **[Store Listing Quick Reference](docs/STORE_LISTING_QUICK_REFERENCE.md)** - ⚡ **NEW! ONE-PAGE**: Copy-paste quick reference card
+- **[Google Play Store Listing Outline](GOOGLE_PLAY_STORE_LISTING_OUTLINE.md)** - 📋 **MASTER OUTLINE!** Strategic guide consolidating all store listing requirements
+- **[Play Store Submission Guide](docs/PLAY_STORE_SUBMISSION_GUIDE.md)** - 🚀 **COMPLETE WORKFLOW**: End-to-end submission guide with all details
+- **[Store Listing Quick Reference](docs/STORE_LISTING_QUICK_REFERENCE.md)** - ⚡ **ONE-PAGE**: Copy-paste quick reference card
 - **[Manual Setup Instructions](docs/MANUAL_SETUP_INSTRUCTIONS.md)** - ⭐ **ACTION PLAN**: Your 5 tasks to get on Play Store
 - **[Google Play Setup Summary](docs/GOOGLE_PLAY_SETUP_SUMMARY.md)** - Complete overview: What's ready vs what you need to do
-- **[Getting Started Guide](docs/GETTING_STARTED.md)** - 🚀 **NEW!** Your navigation hub - understand the docs and pick your path
-- **[Quick Reference Card](docs/QUICK_REFERENCE.md)** - ⚡ **NEW!** One-page quick reference with essential info
+- **[Getting Started Guide](docs/GETTING_STARTED.md)** - 🚀 Your navigation hub - understand the docs and pick your path
+- **[Quick Reference Card](docs/QUICK_REFERENCE.md)** - ⚡ One-page quick reference with essential info
 - **[Quick Start Guide](docs/QUICKSTART.md)** - Fast-track guide for Google Play registration
 - **[Google Play Setup Guide](docs/GOOGLE_PLAY_SETUP.md)** - Complete walkthrough for creating a Google Play Developer account and registering the app
 - **[Setup Progress Tracker](docs/PLAY_CONSOLE_SETUP_TRACKER.md)** - 📊 Step-by-step progress tracker with checkboxes for the entire setup process
-- **[Pre-Flight Checklist](docs/PRE_FLIGHT_CHECKLIST.md)** - ✈️ **NEW!** Final verification checklist before submission
+- **[Pre-Flight Checklist](docs/PRE_FLIGHT_CHECKLIST.md)** - ✈️ Final verification checklist before submission
 
 #### Ready-to-Use Content
 - **[App Listing Draft](docs/PLAY_CONSOLE_APP_LISTING_DRAFT.md)** - ✅ Copy-paste ready content for Google Play Console (descriptions, categories, etc.)
