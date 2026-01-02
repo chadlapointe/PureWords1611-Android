@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.purewords1611.android.data.Verse
 import com.purewords1611.android.data.VerseRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * Game states representing the current phase of gameplay.
@@ -34,8 +36,12 @@ data class GameUiState(
 
 /**
  * ViewModel for managing game state and logic.
+ * Uses Hilt for dependency injection.
  */
-class GameViewModel(private val repository: VerseRepository) : ViewModel() {
+@HiltViewModel
+class GameViewModel @Inject constructor(
+    private val repository: VerseRepository
+) : ViewModel() {
     
     private val _uiState = MutableStateFlow(GameUiState())
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()

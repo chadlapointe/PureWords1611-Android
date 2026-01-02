@@ -4,9 +4,11 @@ import androidx.lifecycle.ViewModel
 import com.purewords1611.android.data.MatchableWord
 import com.purewords1611.android.data.WordMatchingEngine
 import com.purewords1611.android.data.WordPair
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 /**
  * Game states for word matching.
@@ -36,8 +38,10 @@ data class WordMatchingUiState(
 
 /**
  * ViewModel for word matching game.
+ * Uses Hilt for dependency injection.
  */
-class WordMatchingViewModel : ViewModel() {
+@HiltViewModel
+class WordMatchingViewModel @Inject constructor() : ViewModel() {
     
     companion object {
         // Offset for right word IDs to avoid collision with left word IDs
