@@ -84,6 +84,8 @@ This repository includes comprehensive documentation for setting up and publishi
 
 ### 🎯 Start Here - Game & Feature Documentation
 
+**🎮 [CORE GAME MECHANICS - ROUND 1](CORE_GAME_MECHANICS_ROUND_1.md)** - ⭐ **NEW! DEFINITIVE SPEC!** Complete Round 1 design specification consolidating all game mechanics
+
 **📋 [FEATURE SET DEFINITION](FEATURE_SET_DEFINITION.md)** - ⭐ **MASTER DOCUMENT!** Complete feature set definition for all three game modes
 
 **🔄 [GAME LOOP ARCHITECTURE](GAME_LOOP_ARCHITECTURE.md)** - 🏗️ **TECHNICAL SPECS!** Detailed game loop architecture and state machines
