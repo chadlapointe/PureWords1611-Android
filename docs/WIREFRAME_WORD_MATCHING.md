@@ -157,7 +157,7 @@ Tap "Next Level"
 │                                                                 │
 │  ┌──────────────┐        ┌──────────────┐                     │
 │  │  ╔═════════╗ │        │              │                     │
-│  │  ║  love   ║ │◀───Selected           │   charity    │                     │ Selected
+│  │  ║  love   ║ │        │   charity    │                     │ Selected
 │  │  ╚═════════╝ │        │              │                     │ (Blue bg)
 │  └──────────────┘        └──────────────┘                     │
 │                                                                 │

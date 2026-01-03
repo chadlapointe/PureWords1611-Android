@@ -164,7 +164,7 @@ Tap "Word Grid"
 │  │     ┌────┬────┬────┬────┐                                │ │
 │  │     │ C  │ A  │ T  │ S④ │  ← Path shown                 │ │
 │  │     ├────┼────┼────┼────┤     with connecting            │ │
-│  │     │ R  │ O② │ N③ │ E  │     lines (optional)           │ │
+│  │     │ R  │ O② │ N③ │ E  │     lines (future)             │ │
 │  │     ├────┼────┼────┼────┤                                │ │
 │  │     │ P  │ W① │ D  │ L  │                                │ │
 │  │     ├────┼────┼────┼────┤                                │ │
@@ -193,7 +193,7 @@ Tap "Word Grid"
 **Selection Visualization:**
 - Selected cells: Blue background (#2196F3)
 - Selection numbers: ①②③④ (small badge in corner)
-- Path lines: Optional visual connecting selected cells
+- Path lines: Future enhancement - visual connecting selected cells
 - Current word display: Updates in real-time as letters selected
 
 ---
@@ -777,6 +777,9 @@ data class GridPosition(
 ```
 
 ### Letter Distribution
+
+Weighted random generation for playable grids based on English letter frequency:
+
 ```kotlin
 // Weighted distribution for playable grids
 val letterWeights = mapOf(
