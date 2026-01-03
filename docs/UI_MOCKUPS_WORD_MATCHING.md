@@ -291,7 +291,7 @@ Visual States:
 └────────────────────────────────────────────────────┘
 
 Note: Both words return to unselected state after incorrect match.
-Score is reduced by -2 points per mistake (minimum score: 0).
+Score is reduced by 2 points per mistake (minimum score: 0).
 The game engine prevents negative scores.
 ```
 
