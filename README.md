@@ -82,9 +82,13 @@ cd PureWords1611-Android
 
 This repository includes comprehensive documentation for setting up and publishing the app to the Google Play Store.
 
-### 🎯 Start Here - Game & Feature Documentation
+### 🎯 Start Here - App Structure & UI Documentation
 
-**🎮 [CORE GAME MECHANICS - ROUND 1](CORE_GAME_MECHANICS_ROUND_1.md)** - ⭐ **NEW! DEFINITIVE SPEC!** Complete Round 1 design specification consolidating all game mechanics
+**📱 [UI MOCKUP DELIVERABLE](UI_MOCKUP_DELIVERABLE.md)** - ⭐ **PRIMARY DELIVERABLE!** Complete UI mockups with visual representations of all screens and navigation flows
+
+**🏗️ [APP STRUCTURE OVERVIEW](APP_STRUCTURE_OVERVIEW.md)** - 🎯 **ARCHITECTURE GUIDE!** Complete technical architecture documentation with MVVM, DI, and data flow diagrams
+
+**🎮 [CORE GAME MECHANICS - ROUND 1](CORE_GAME_MECHANICS_ROUND_1.md)** - ⭐ **DEFINITIVE SPEC!** Complete Round 1 design specification consolidating all game mechanics
 
 **📋 [FEATURE SET DEFINITION](FEATURE_SET_DEFINITION.md)** - ⭐ **MASTER DOCUMENT!** Complete feature set definition for all three game modes
 
