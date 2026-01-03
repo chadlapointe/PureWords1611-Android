@@ -244,7 +244,7 @@ Visual States:
 │              🎮 Word Matching                      │
 │                                                    │
 │  ┌────────────────────────────────────────────┐  │
-│  │  Level: 1/5     Score: -2     Matches: 0/5 │  │
+│  │  Level: 1/5     Score: 0      Matches: 0/5 │  │
 │  └────────────────────────────────────────────┘  │
 │                                                    │
 │  ╔════════════════════════════════════════════╗  │
@@ -291,7 +291,8 @@ Visual States:
 └────────────────────────────────────────────────────┘
 
 Note: Both words return to unselected state after incorrect match.
-Score is reduced by -2 points per mistake.
+Score is reduced by -2 points per mistake (minimum score: 0).
+The game engine prevents negative scores.
 ```
 
 ### 5. Mid-Level Progress
@@ -768,7 +769,7 @@ Matched → (locked, no further transitions)
 │  On Success Container:   #1B5E20 (Dark Green)       │
 │                                                      │
 │  Error:                  #D32F2F (Red)              │
-│  Error Container:        #FFEBEE (Light Red)        │
+│  Error Container:        #FFEBEE (Light Pink)       │
 │  On Error Container:     #B71C1C (Dark Red)         │
 │                                                      │
 │  Warning:                #FFA000 (Amber)            │
@@ -981,8 +982,9 @@ Adjusted layout:
 ### Card Selection
 
 ```kotlin
-// Material Design motion specification
-animateContentSize(
+// Material Design motion specification for scale animation
+val scale by animateFloatAsState(
+    targetValue = if (isSelected) 1.02f else 1.0f,
     animationSpec = spring(
         dampingRatio = Spring.DampingRatioMediumBouncy,
         stiffness = Spring.StiffnessLow
@@ -1340,6 +1342,8 @@ The implementation follows modern Android development best practices with Jetpac
 ---
 
 **Document Status**: ✅ Complete  
-**Implementation Status**: ✅ Already Implemented in Code  
+**Implementation Status**: 🎨 Design Mockups Complete (UI code exists in `WordMatchingGameScreen.kt`)  
 **Created By**: GitHub Copilot Coding Agent  
 **Date**: January 3, 2026
+
+**Note**: This document provides visual mockups and specifications. The actual Jetpack Compose UI implementation already exists in the codebase. These mockups serve as design reference and documentation for the implemented UI.
