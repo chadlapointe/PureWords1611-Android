@@ -132,6 +132,8 @@ These documents provide:
 - **[App Concept & Feature List](docs/APP_CONCEPT.md)** - 📱 Complete app concept definition, feature roadmap, user personas, and technical architecture
 - **[Feature Set Definition](FEATURE_SET_DEFINITION.md)** - 🎮 **MASTER REFERENCE** for all game modes and features
 - **[Game Loop Architecture](GAME_LOOP_ARCHITECTURE.md)** - 🏗️ Technical specifications for core game loops
+- **[Competitor Analysis](docs/COMPETITOR_ANALYSIS_WORDLE_SIMILAR_GAMES.md)** - 📊 **COMPREHENSIVE ANALYSIS** of Wordle and similar word games (35+ pages)
+- **[Competitor Analysis Summary](docs/COMPETITOR_ANALYSIS_SUMMARY.md)** - ⚡ **QUICK REFERENCE** - Key insights and recommendations
 
 #### Play Store Setup Guides
 - **[Google Play Store Listing Outline](GOOGLE_PLAY_STORE_LISTING_OUTLINE.md)** - 📋 **MASTER OUTLINE!** Strategic guide consolidating all store listing requirements
