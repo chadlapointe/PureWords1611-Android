@@ -1,0 +1,16 @@
+[
+  {
+    "step_id": "full-1",
+    "track_id": "FULL_EVIDENCE",
+    "sequence": 1,
+    "title": "Begin with the pure words",
+    "body_markdown": "Read Psalm 12:6 and observe the claim of purity."
+  },
+  {
+    "step_id": "gentle-1",
+    "track_id": "GENTLER_START",
+    "sequence": 1,
+    "title": "Start with Scripture context",
+    "body_markdown": "Read Genesis 1:1 and note the consistency of the text claim."
+  }
+]

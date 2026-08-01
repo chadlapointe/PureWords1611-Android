@@ -1,0 +1,18 @@
+[
+  {
+    "doc_id": "TRANSLATORS_TO_THE_READER",
+    "title": "Translators to the Reader",
+    "text_original": "This is a starter placeholder for the canonical front matter import contract.",
+    "text_modernized_spelling": "This is a starter placeholder for the canonical front matter import contract.",
+    "source_id": "kjv1611-facsimile-sample",
+    "checksum_sha256": "113273880f2dd8df4816ce491f3f89bf31249d11150f44d8f23322f62f5b23bc"
+  },
+  {
+    "doc_id": "EPISTLE_DEDICATORY",
+    "title": "Epistle Dedicatory",
+    "text_original": "This is a starter placeholder for the canonical front matter import contract.",
+    "text_modernized_spelling": "This is a starter placeholder for the canonical front matter import contract.",
+    "source_id": "kjv1611-facsimile-sample",
+    "checksum_sha256": "fcd92873b98a22f3735e6f146c8950767a2fd441f4d66f2f355805e4fe4b8334"
+  }
+]

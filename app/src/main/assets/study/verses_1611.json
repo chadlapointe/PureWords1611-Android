@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "book_display_name": "Genesis",
+    "chapter": 1,
+    "verse": 1,
+    "testament_section": "OLD_TESTAMENT",
+    "canonical_order": 1,
+    "text_original_1611": "In the beginning God created the heauen and the earth.",
+    "text_modernized_spelling": "In the beginning God created the heaven and the earth.",
+    "has_italicized_words": false,
+    "source_id": "kjv1611-facsimile-sample",
+    "source_locator": "Genesis 1:1",
+    "checksum_sha256": "c6a5dce95a743f0fd0a2f9a2a77f82eb2b6eea0df13fe304cf11ff437c14f31b"
+  },
+  {
+    "id": 2,
+    "book_display_name": "Psalmes",
+    "chapter": 12,
+    "verse": 6,
+    "testament_section": "OLD_TESTAMENT",
+    "canonical_order": 2,
+    "text_original_1611": "The words of the LORD are pure words: as siluer tried in a fornace of earth, purified seuen times.",
+    "text_modernized_spelling": "The words of the LORD are pure words: as silver tried in a furnace of earth, purified seven times.",
+    "has_italicized_words": false,
+    "source_id": "kjv1611-facsimile-sample",
+    "source_locator": "Psalmes 12:6",
+    "checksum_sha256": "53f31d095436205c84f6bb20e78813199f5f9f7b5f9dc96bf1f9c307268f6534"
+  },
+  {
+    "id": 3,
+    "book_display_name": "1 Esdras",
+    "chapter": 1,
+    "verse": 1,
+    "testament_section": "APOCRYPHA",
+    "canonical_order": 3,
+    "text_original_1611": "And Iosias held the feast of the Passeouer in Ierusalem unto his Lord, and offered the Passeouer the fourteenth day of the first moneth.",
+    "text_modernized_spelling": "And Josias held the feast of the Passover in Jerusalem unto his Lord, and offered the Passover the fourteenth day of the first month.",
+    "has_italicized_words": false,
+    "source_id": "kjv1611-facsimile-sample",
+    "source_locator": "1 Esdras 1:1",
+    "checksum_sha256": "a1a6aeb9859458aec11a9d684fbe2c4d0f4f4a1675055db9f6d74f894109b367"
+  }
+]
