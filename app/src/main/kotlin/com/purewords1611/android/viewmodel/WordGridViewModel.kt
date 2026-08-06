@@ -13,17 +13,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 import javax.inject.Inject
 
 /**
  * Game states for the word grid game.
  */
 sealed class WordGridGameState {
-    object Loading : WordGridGameState()
-    object Playing : WordGridGameState()
-    object Paused : WordGridGameState()
-    object TimeUp : WordGridGameState()
-    object Victory : WordGridGameState()
+    data object Loading : WordGridGameState()
+    data object Playing : WordGridGameState()
+    data object Paused : WordGridGameState()
+    data object TimeUp : WordGridGameState()
+    data object Victory : WordGridGameState()
 }
 
 /**
@@ -36,7 +37,7 @@ data class WordGridUiState(
     val score: Int = 0,
     val timeRemaining: Int = WordGridViewModel.INITIAL_TIME_SECONDS,
     val gameState: WordGridGameState = WordGridGameState.Loading,
-    val feedback: String = ""
+    val feedback: String = "",
 )
 
 /**
@@ -185,9 +186,9 @@ class WordGridViewModel @Inject constructor(
     private fun startTimer() {
         timerJob?.cancel()
         timerJob = viewModelScope.launch {
-            while (_uiState.value.timeRemaining > 0 && 
-                   _uiState.value.gameState == WordGridGameState.Playing) {
-                delay(1000)
+            while ((_uiState.value.timeRemaining > 0) &&
+                   (_uiState.value.gameState == WordGridGameState.Playing)) {
+                delay(1.seconds)
                 val newTime = _uiState.value.timeRemaining - 1
                 _uiState.value = _uiState.value.copy(timeRemaining = newTime)
                 

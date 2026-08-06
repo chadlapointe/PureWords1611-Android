@@ -1,12 +1,42 @@
 [
   {
     "id": 1,
-    "verse_id": 2,
-    "note_type": "TRANSLATION_NOTE",
-    "note_text": "Core anchor verse for the app mission and textual fidelity.",
+    "verse_id": 1,
+    "note_type": "VARIANT_ORTHOGRAPHY",
+    "note_text": "1611 facsimile shows \\\"heauen\\\" with a \\\"u\\\" for \\\"v\\\".",
+    "anchor_token": "heauen",
+    "source_id": "kjv1611-facsimile-sample",
+    "source_locator": "Genesis 1:1",
+    "checksum_sha256": "82"
+  },
+  {
+    "id": 2,
+    "verse_id": 4,
+    "note_type": "CROSS_REFERENCE",
+    "note_text": "Proverbs 30:5",
     "anchor_token": "pure words",
     "source_id": "kjv1611-facsimile-sample",
-    "source_locator": "Psalmes 12:6 margin",
-    "checksum_sha256": "88464be1fa4e4626f7403f69795fbb2ac7dd9f31bb95f7f1c37eb26f63f0e267"
+    "source_locator": "Psalmes 12:6",
+    "checksum_sha256": "..."
+  },
+  {
+    "id": 3,
+    "verse_id": 12,
+    "note_type": "TRANSLATOR_NOTE",
+    "note_text": "Greek: the beggers in spirit.",
+    "anchor_token": "poore in spirit",
+    "source_id": "kjv1611-facsimile-sample",
+    "source_locator": "Matthew 5:3",
+    "checksum_sha256": "..."
+  },
+  {
+    "id": 4,
+    "verse_id": 5,
+    "note_type": "CROSS_REFERENCE",
+    "note_text": "Ezek. 34.11.",
+    "anchor_token": "LORD is my shepheard",
+    "source_id": "kjv1611-facsimile-sample",
+    "source_locator": "Psalmes 23:1",
+    "checksum_sha256": "..."
   }
 ]

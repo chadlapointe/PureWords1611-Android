@@ -26,13 +26,16 @@ object StudyDatabaseModule {
     @Provides
     @Singleton
     fun provideStudyDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): StudyDatabase {
         return Room.databaseBuilder(
             context,
             StudyDatabase::class.java,
             "pure_words_study.db"
-        ).fallbackToDestructiveMigration().build()
+        )
+            .createFromAsset("database/full_1611_bible.db")
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides

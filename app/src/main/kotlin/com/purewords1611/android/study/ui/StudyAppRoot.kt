@@ -1,30 +1,52 @@
 package com.purewords1611.android.study.ui
 
-import android.speech.tts.TextToSpeech
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.AssistChip
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -34,23 +56,35 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.purewords1611.android.analytics.AnalyticsManager
-import com.purewords1611.android.study.data.ChapterIndexEntry
 import com.purewords1611.android.study.data.ExplanationDepth
 import com.purewords1611.android.study.data.ExplanationEntry
+import com.purewords1611.android.study.data.MarginalNote
 import com.purewords1611.android.study.data.OrthographyMode
+import com.purewords1611.android.study.data.ReaderItem
 import com.purewords1611.android.study.data.SeekerStepEntry
 import com.purewords1611.android.study.data.SeekerTrackEntry
 import com.purewords1611.android.study.data.TestamentSection
+import com.purewords1611.android.study.data.TranslationMode
 import com.purewords1611.android.study.data.VerseText
 import java.util.Locale
 
 private enum class RootDestination(
-    val label: String
+    val label: String,
 ) {
     READ("Read"),
     NOTES("Notes"),
@@ -61,23 +95,19 @@ private enum class RootDestination(
 @Composable
 fun StudyAppRoot(
     analyticsManager: AnalyticsManager,
-    viewModel: StudyViewModel = hiltViewModel()
+    viewModel: StudyViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val context = LocalContext.current
-    var ttsReady by remember { mutableStateOf(false) }
-    val textToSpeech = remember {
-        TextToSpeech(context) { status ->
-            ttsReady = status == TextToSpeech.SUCCESS
-        }
-    }
-    DisposableEffect(Unit) {
-        onDispose {
-            textToSpeech.stop()
-            textToSpeech.shutdown()
-        }
-    }
     var destination by rememberSaveable { mutableStateOf(RootDestination.READ) }
+    var showSettings by remember { mutableStateOf(false) }
+    var showBibleSelector by remember { mutableStateOf(false) }
+    var showStudyHub by remember { mutableStateOf(false) }
+
+    LaunchedEffect(uiState.selectedVerseId) {
+        if (uiState.selectedVerseId != null) {
+            showStudyHub = true
+        }
+    }
 
     LaunchedEffect(destination) {
         analyticsManager.trackScreenView("Study_${destination.name}")
@@ -86,7 +116,54 @@ fun StudyAppRoot(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Pure Words 1611 Study") }
+                title = {
+                    Row(
+                        modifier = Modifier.clickable { showBibleSelector = true },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        val title = uiState.activeChapter?.let { chapter ->
+                            val bookName = if (uiState.orthographyMode == OrthographyMode.ORIGINAL_1611) {
+                                chapter.bookOriginal ?: chapter.book
+                            } else {
+                                chapter.book
+                            }
+                            val chapterDisplay = if (uiState.orthographyMode == OrthographyMode.ORIGINAL_1611) {
+                                toRomanNumeral(chapter.chapter)
+                            } else {
+                                chapter.chapter.toString()
+                            }
+                            "$bookName $chapterDisplay"
+                        } ?: "Select Chapter"
+                        Text(
+                            text = title,
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Icon(Icons.Default.ArrowDropDown, contentDescription = null)
+                    }
+                },
+                actions = {
+                    if (destination == RootDestination.READ) {
+                        if (uiState.isReadingChapter) {
+                            IconButton(onClick = viewModel::stopReading) {
+                                Icon(Icons.Default.Clear, contentDescription = "Stop Reading")
+                            }
+                        } else {
+                            IconButton(onClick = {
+                                viewModel.readFullChapter()
+                            }) {
+                                Icon(Icons.Default.PlayArrow, contentDescription = "Read Chapter")
+                            }
+                        }
+                        TextButton(onClick = viewModel::toggleTranslationMode) {
+                            Text(if (uiState.translationMode == TranslationMode.KJV_1611) "1611" else "ESV")
+                        }
+                        IconButton(onClick = { showSettings = true }) {
+                            Icon(Icons.Default.MoreVert, contentDescription = "Settings")
+                        }
+                    }
+                }
             )
         },
         bottomBar = {
@@ -102,28 +179,69 @@ fun StudyAppRoot(
             }
         }
     ) { padding ->
+        if (showBibleSelector) {
+            BibleSelectorDialog(
+                chapters = uiState.chapterIndex,
+                orthographyMode = uiState.orthographyMode,
+                onChapterSelected = viewModel::selectChapter,
+                onDismiss = { showBibleSelector = false }
+            )
+        }
+
+        if (showStudyHub) {
+            ModalBottomSheet(
+                onDismissRequest = {
+                    showStudyHub = false
+                    viewModel.clearSelectedVerse()
+                },
+                sheetState = rememberModalBottomSheetState()
+            ) {
+                StudyHubSheet(
+                    state = uiState,
+                    onSpeakSelectedVerse = viewModel::speakSelectedVerse,
+                    onReadFromHere = {
+                        if (uiState.selectedVerseId != null) {
+                            viewModel.readFullChapter(uiState.selectedVerseId)
+                            showStudyHub = false
+                        }
+                    },
+                    onAddBookmark = viewModel::addBookmarkForSelectedVerse,
+                    onAddHighlight = viewModel::addHighlightForSelectedVerse,
+                    onSavePersonalNote = viewModel::savePersonalNoteForSelectedVerse,
+                    onGoToChapter = { book, chapter ->
+                        viewModel.updateQuery("")
+                        viewModel.selectChapter(book, chapter)
+                        showStudyHub = false
+                    },
+                    onClose = {
+                        showStudyHub = false
+                        viewModel.clearSelectedVerse()
+                    }
+                )
+            }
+        }
+
+        if (showSettings) {
+            ModalBottomSheet(
+                onDismissRequest = { showSettings = false },
+                sheetState = rememberModalBottomSheetState()
+            ) {
+                StudySettingsSheet(
+                    state = uiState,
+                    onQueryChanged = viewModel::updateQuery,
+                    onOrthographyChanged = viewModel::setOrthographyMode,
+                    onExplanationDepthChanged = viewModel::setExplanationDepth,
+                    onClose = { showSettings = false }
+                )
+            }
+        }
+
         when (destination) {
             RootDestination.READ -> ReadScreen(
                 state = uiState,
-                onQueryChanged = viewModel::updateQuery,
-                onOrthographyChanged = viewModel::setOrthographyMode,
-                onExplanationDepthChanged = viewModel::setExplanationDepth,
-                onPreviousChapter = viewModel::goToPreviousChapter,
-                onNextChapter = viewModel::goToNextChapter,
-                onChapterSelected = viewModel::selectChapter,
                 onVerseSelected = viewModel::selectVerse,
-                onClearSelectedVerse = viewModel::clearSelectedVerse,
-                onSpeakSelectedVerse = {
-                    if (ttsReady && uiState.selectedVerseDisplayText != null) {
-                        textToSpeech.language = Locale.US
-                        textToSpeech.speak(
-                            uiState.selectedVerseDisplayText,
-                            TextToSpeech.QUEUE_FLUSH,
-                            null,
-                            "selected_verse"
-                        )
-                    }
-                },
+                onScrollHandled = viewModel::onScrollToVerseHandled,
+                onUpdateActiveChapter = viewModel::updateActiveChapterFromScroll,
                 modifier = Modifier.padding(padding)
             )
             RootDestination.NOTES -> NotesScreen(
@@ -145,170 +263,503 @@ fun StudyAppRoot(
 }
 
 @Composable
-private fun ReadScreen(
+private fun StudySettingsSheet(
     state: StudyUiState,
     onQueryChanged: (String) -> Unit,
     onOrthographyChanged: (OrthographyMode) -> Unit,
     onExplanationDepthChanged: (ExplanationDepth) -> Unit,
-    onPreviousChapter: () -> Unit,
-    onNextChapter: () -> Unit,
-    onChapterSelected: (String, Int) -> Unit,
+    onClose: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text("Study Preferences", style = MaterialTheme.typography.titleLarge)
+        
+        OutlinedTextField(
+            value = state.query,
+            onValueChange = onQueryChanged,
+            label = { Text("Search pure text") },
+            modifier = Modifier.fillMaxWidth(),
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) }
+        )
+
+        OrthographyToggle(
+            mode = state.orthographyMode,
+            onModeChanged = onOrthographyChanged
+        )
+
+        ExplanationDepthToggle(
+            depth = state.explanationDepth,
+            onDepthChanged = onExplanationDepthChanged
+        )
+
+        Button(onClick = onClose, modifier = Modifier.align(Alignment.End)) {
+            Text("Done")
+        }
+        
+        Spacer(modifier = Modifier.height(32.dp))
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun ReadScreen(
+    state: StudyUiState,
     onVerseSelected: (Long) -> Unit,
-    onClearSelectedVerse: () -> Unit,
-    onSpeakSelectedVerse: () -> Unit,
+    onScrollHandled: () -> Unit,
+    onUpdateActiveChapter: (String, Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(state.scrollToVerseId) {
+        state.scrollToVerseId?.let { verseId ->
+            val index = state.readerItems.indexOfFirst { 
+                it is ReaderItem.VerseLine && it.verse.id == verseId 
+            }
+            if (index >= 0) {
+                listState.animateScrollToItem(index)
+                onScrollHandled()
+            }
+        }
+    }
+
+    LaunchedEffect(listState) {
+        snapshotFlow { listState.firstVisibleItemIndex }
+            .collect { index ->
+                if (index < state.readerItems.size) {
+                    val item = state.readerItems[index]
+                    if (item is ReaderItem.VerseLine) {
+                        onUpdateActiveChapter(item.verse.book, item.verse.chapter)
+                    } else if (item is ReaderItem.ChapterHeader) {
+                        onUpdateActiveChapter(item.book, item.chapter)
+                    }
+                }
+            }
+    }
+
     LazyColumn(
+        state = listState,
         modifier = modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        contentPadding = PaddingValues(bottom = 80.dp),
     ) {
-        item {
-            Text(
-                text = "Reading & Study",
-                style = MaterialTheme.typography.headlineSmall
-            )
-        }
-        item {
-            Text(
-                text = "Includes Old Testament, Apocrypha, and New Testament structure.",
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
-        item {
-            Text(
-                text = "Apocrypha verses loaded: ${state.apocryphaVerseCount}",
-                style = MaterialTheme.typography.labelLarge
-            )
-        }
-        state.activeChapter?.let { chapter ->
+        if (state.readerItems.isEmpty()) {
             item {
-                ChapterNavigationCard(
-                    chapterLabel = "${chapter.book} ${chapter.chapter}",
-                    onPreviousChapter = onPreviousChapter,
-                    onNextChapter = onNextChapter
-                )
-            }
-        }
-        item {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                OutlinedTextField(
-                    value = state.query,
-                    onValueChange = onQueryChanged,
-                    label = { Text("Search pure text") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-                OrthographyToggle(
-                    mode = state.orthographyMode,
-                    onModeChanged = onOrthographyChanged
-                )
-                ExplanationDepthToggle(
-                    depth = state.explanationDepth,
-                    onDepthChanged = onExplanationDepthChanged
-                )
-            }
-        }
-        if (state.chapterIndex.isNotEmpty()) {
-            item {
-                ChapterJumpRow(
-                    chapters = state.chapterIndex,
-                    activeChapter = state.activeChapter,
-                    onChapterSelected = onChapterSelected
-                )
-            }
-        }
-        if (state.selectedVerseId != null) {
-            item {
-                TextButton(onClick = onSpeakSelectedVerse) {
-                    Text("Play Audio for Selected Verse")
+                Box(
+                    modifier = Modifier.fillParentMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text("Reading Pure Words...")
+                        if (state.importProgress > 0f && state.importProgress < 1f) {
+                            val percentage = (state.importProgress * 100).toInt()
+                            Text(
+                                text = "Initial indexing: $percentage%",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            androidx.compose.material3.LinearProgressIndicator(
+                                progress = { state.importProgress },
+                                modifier = Modifier.width(200.dp)
+                            )
+                        }
+                        if (state.query.isNotBlank()) {
+                            Text("No results found for \"${state.query}\"", style = MaterialTheme.typography.labelSmall)
+                        }
+                    }
                 }
             }
-            item {
-                SelectedVerseNotesCard(
-                    notes = state.selectedVerseNotes,
-                    onClose = onClearSelectedVerse
-                )
-            }
-            item {
-                SelectedVerseExplanationsCard(
-                    explanations = state.selectedVerseExplanations,
-                    depth = state.explanationDepth
-                )
-            }
         }
-        items(state.verses) { verse ->
-            VerseCard(
-                verse = verse,
-                mode = state.orthographyMode,
-                isSelected = state.selectedVerseId == verse.id,
-                onClick = { onVerseSelected(verse.id) }
-            )
-        }
-    }
-}
 
-@Composable
-private fun ChapterNavigationCard(
-    chapterLabel: String,
-    onPreviousChapter: () -> Unit,
-    onNextChapter: () -> Unit
-) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "Current Chapter",
-                style = MaterialTheme.typography.labelLarge
-            )
-            Text(
-                text = chapterLabel,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextButton(onClick = onPreviousChapter) {
-                    Text("Previous")
+        state.readerItems.forEachIndexed { index, item ->
+            when (item) {
+                is ReaderItem.SectionHeader -> {
+                    item(key = "section_${item.section.name}") {
+                        SectionHeaderItem(section = item.section)
+                    }
                 }
-                TextButton(onClick = onNextChapter) {
-                    Text("Next")
-                }
-            }
-        }
-    }
-}
-
-@Composable
-private fun ChapterJumpRow(
-    chapters: List<ChapterIndexEntry>,
-    activeChapter: ChapterIndexEntry?,
-    onChapterSelected: (String, Int) -> Unit
-) {
-    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        Text(
-            text = "Jump to Chapter",
-            style = MaterialTheme.typography.labelLarge
-        )
-        LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            items(chapters) { chapter ->
-                AssistChip(
-                    onClick = { onChapterSelected(chapter.book, chapter.chapter) },
-                    label = {
-                        val isActive = activeChapter?.book == chapter.book &&
-                            activeChapter.chapter == chapter.chapter
-                        Text(
-                            text = if (isActive) {
-                                "• ${chapter.book} ${chapter.chapter}"
-                            } else {
-                                "${chapter.book} ${chapter.chapter}"
-                            }
+                is ReaderItem.BookHeader -> {
+                    stickyHeader(key = "book_${item.book}") {
+                        BookHeaderItem(
+                            book = item.book,
+                            bookOriginal = item.bookOriginal,
+                            orthographyMode = state.orthographyMode
                         )
                     }
+                }
+                is ReaderItem.ChapterHeader -> {
+                    item(key = "chapter_${item.book}_${item.chapter}") {
+                        ChapterHeaderItem(
+                            chapter = item.chapter,
+                            orthographyMode = state.orthographyMode
+                        )
+                    }
+                }
+                is ReaderItem.VerseLine -> {
+                    item(key = "verse_${item.verse.id}") {
+                        val isFirstInChapter = remember(state.readerItems, index) {
+                            index > 0 && state.readerItems[index - 1] is ReaderItem.ChapterHeader
+                        }
+                        
+                        if (isFirstInChapter && state.query.isBlank()) {
+                            DropCapVerseLine(
+                                verse = item.verse,
+                                mode = state.orthographyMode,
+                                translation = state.translationMode,
+                                isHighlighted = state.highlightedVerseId == item.verse.id,
+                                isSelected = state.selectedVerseId == item.verse.id,
+                                onClick = { onVerseSelected(item.verse.id) }
+                            )
+                        } else {
+                            VerseTextLine(
+                                verse = item.verse,
+                                mode = state.orthographyMode,
+                                translation = state.translationMode,
+                                isHighlighted = state.highlightedVerseId == item.verse.id,
+                                isSelected = state.selectedVerseId == item.verse.id,
+                                isSearchMode = state.query.isNotBlank(),
+                                onClick = { onVerseSelected(item.verse.id) }
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SectionHeaderItem(section: TestamentSection) {
+    val text = when (section) {
+        TestamentSection.OLD_TESTAMENT -> "THE OLD TESTAMENT"
+        TestamentSection.APOCRYPHA -> "THE APOCRYPHA"
+        TestamentSection.NEW_TESTAMENT -> "THE NEW TESTAMENT"
+    }
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 48.dp, bottom = 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.secondary,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun BookHeaderItem(
+    book: String,
+    bookOriginal: String?,
+    orthographyMode: OrthographyMode
+) {
+    val display = if (orthographyMode == OrthographyMode.ORIGINAL_1611) {
+        bookOriginal ?: book
+    } else {
+        book
+    }
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f),
+        tonalElevation = 2.dp
+    ) {
+        Text(
+            text = display,
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(16.dp),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+private fun ChapterHeaderItem(
+    chapter: Int,
+    orthographyMode: OrthographyMode
+) {
+    val chapterDisplay = if (orthographyMode == OrthographyMode.ORIGINAL_1611) {
+        "CHAP. ${toRomanNumeral(chapter)}."
+    } else {
+        "Chapter $chapter"
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        HorizontalDivider(modifier = Modifier.width(64.dp))
+        Text(
+            text = chapterDisplay,
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(top = 16.dp)
+        )
+    }
+}
+
+@Composable
+private fun VerseTextLine(
+    verse: VerseText,
+    mode: OrthographyMode,
+    translation: TranslationMode,
+    isHighlighted: Boolean,
+    isSelected: Boolean,
+    isSearchMode: Boolean,
+    onClick: () -> Unit
+) {
+    val backgroundColor = when {
+        isHighlighted -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+        isSelected -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f)
+        else -> androidx.compose.ui.graphics.Color.Transparent
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .background(backgroundColor)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+    ) {
+        Text(
+            text = verse.verse.toString(),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.width(24.dp).padding(top = 4.dp)
+        )
+        Column(modifier = Modifier.weight(1f)) {
+            if (isSearchMode) {
+                Text(
+                    text = "${verse.book} ${verse.chapter}",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.padding(bottom = 2.dp)
+                )
+            }
+            val rawText = if (translation == TranslationMode.ESV) {
+                verse.comparativeText ?: verse.modernizedText
+            } else {
+                if (mode == OrthographyMode.ORIGINAL_1611) verse.originalText else verse.modernizedText
+            }
+            Text(
+                text = parseItalicText(rawText),
+                style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 28.sp)
+            )
+        }
+    }
+}
+
+@Composable
+private fun DropCapVerseLine(
+    verse: VerseText,
+    mode: OrthographyMode,
+    translation: TranslationMode,
+    isHighlighted: Boolean,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    val backgroundColor = when {
+        isHighlighted -> MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+        isSelected -> MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f)
+        else -> androidx.compose.ui.graphics.Color.Transparent
+    }
+
+    val rawText = if (translation == TranslationMode.ESV) {
+        verse.comparativeText ?: verse.modernizedText
+    } else {
+        if (mode == OrthographyMode.ORIGINAL_1611) verse.originalText else verse.modernizedText
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable(onClick = onClick)
+            .background(backgroundColor)
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+    ) {
+        Text(
+            text = verse.verse.toString(),
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.width(24.dp).padding(top = 8.dp)
+        )
+        
+        if (rawText.isNotEmpty()) {
+            val dropCap = rawText.take(1)
+            val remainingText = rawText.drop(1)
+            
+            Row(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = dropCap,
+                    style = MaterialTheme.typography.displayLarge.copy(
+                        fontSize = 48.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary
+                    ),
+                    modifier = Modifier.padding(end = 4.dp)
+                )
+                Text(
+                    text = parseItalicText(remainingText),
+                    style = MaterialTheme.typography.bodyLarge.copy(lineHeight = 28.sp),
+                    modifier = Modifier.padding(top = 8.dp)
                 )
             }
         }
+    }
+}
+
+private fun toRomanNumeral(number: Int): String {
+    val romanNumerals = listOf(
+        1000 to "M", 900 to "CM", 500 to "D", 400 to "CD",
+        100 to "C", 90 to "XC", 50 to "L", 40 to "XL",
+        10 to "X", 9 to "IX", 5 to "V", 4 to "IV", 1 to "I"
+    )
+    var n = number
+    val result = StringBuilder()
+    for ((value, numeral) in romanNumerals) {
+        while (n >= value) {
+            result.append(numeral)
+            n -= value
+        }
+    }
+    return result.toString()
+}
+
+private fun parseItalicText(text: String): AnnotatedString {
+    return buildAnnotatedString {
+        val parts = text.split("_")
+        parts.forEachIndexed { index, part ->
+            if (index % 2 == 1) {
+                withStyle(style = SpanStyle(fontStyle = FontStyle.Italic)) {
+                    append(part)
+                }
+            } else {
+                append(part)
+            }
+        }
+    }
+}
+
+@Composable
+private fun StudyHubSheet(
+    state: StudyUiState,
+    onSpeakSelectedVerse: () -> Unit,
+    onReadFromHere: () -> Unit,
+    onAddBookmark: () -> Unit,
+    onAddHighlight: (String) -> Unit,
+    onSavePersonalNote: (String) -> Unit,
+    onGoToChapter: (String, Int) -> Unit,
+    onClose: () -> Unit
+) {
+    var noteDraft by rememberSaveable { mutableStateOf("") }
+    val selectedVerse = remember(state.verses, state.selectedVerseId) {
+        state.verses.firstOrNull { it.id == state.selectedVerseId }
+    }
+    
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(24.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column {
+                Text("Study Hub", style = MaterialTheme.typography.headlineSmall)
+                selectedVerse?.let { 
+                    Text(
+                        text = "${it.book} ${it.chapter}:${it.verse}",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+            IconButton(onClick = onClose) {
+                Icon(Icons.Default.Close, contentDescription = "Close")
+            }
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(onClick = onSpeakSelectedVerse, modifier = Modifier.weight(1f)) {
+                Icon(Icons.Default.PlayArrow, contentDescription = null)
+                Spacer(modifier = Modifier.width(4.dp))
+                Text("Listen")
+            }
+            Button(onClick = onReadFromHere, modifier = Modifier.weight(1f)) {
+                Text("Read from here")
+            }
+            if (state.query.isNotBlank()) {
+                Button(
+                    onClick = { 
+                        selectedVerse?.let { onGoToChapter(it.book, it.chapter) }
+                    },
+                    modifier = Modifier.weight(1f)
+                ) {
+                    Text("Go to Chapter")
+                }
+            }
+        }
+
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            AssistChip(onClick = onAddBookmark, label = { Text("Bookmark") })
+            AssistChip(onClick = { onAddHighlight("yellow") }, label = { Text("Highlight") })
+        }
+
+        HorizontalDivider()
+
+        Text("Marginal Notes", style = MaterialTheme.typography.titleMedium)
+        if (state.selectedVerseNotes.isEmpty()) {
+            Text("No marginal notes for this verse.", style = MaterialTheme.typography.bodyMedium)
+        } else {
+            state.selectedVerseNotes.forEach { note ->
+                Text("• $note", style = MaterialTheme.typography.bodyMedium)
+            }
+        }
+
+        HorizontalDivider()
+
+        Text("Explanations", style = MaterialTheme.typography.titleMedium)
+        if (state.selectedVerseExplanations.isEmpty()) {
+            Text("No explanations for this depth.", style = MaterialTheme.typography.bodyMedium)
+        } else {
+            state.selectedVerseExplanations.forEach { exp ->
+                Text(exp.contentMarkdown, style = MaterialTheme.typography.bodyMedium)
+            }
+        }
+
+        HorizontalDivider()
+
+        Text("Personal Note", style = MaterialTheme.typography.titleMedium)
+        OutlinedTextField(
+            value = noteDraft,
+            onValueChange = { noteDraft = it },
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text("Add your thoughts...") }
+        )
+        Button(
+            onClick = {
+                onSavePersonalNote(noteDraft)
+                noteDraft = ""
+            },
+            modifier = Modifier.align(Alignment.End)
+        ) {
+            Text("Save Note")
+        }
+
+        Spacer(modifier = Modifier.height(32.dp))
     }
 }
 
@@ -359,122 +810,6 @@ private fun OrthographyToggle(
             label = { Text("Modernized Spelling") },
             colors = FilterChipDefaults.filterChipColors()
         )
-    }
-}
-
-@Composable
-private fun VerseCard(
-    verse: VerseText,
-    mode: OrthographyMode,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            val sectionLabel = when (verse.section) {
-                TestamentSection.OLD_TESTAMENT -> "Old Testament"
-                TestamentSection.APOCRYPHA -> "Apocrypha"
-                TestamentSection.NEW_TESTAMENT -> "New Testament"
-            }
-            Text(
-                text = "${verse.book} ${verse.chapter}:${verse.verse} • $sectionLabel",
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = if (mode == OrthographyMode.ORIGINAL_1611) verse.originalText else verse.modernizedText,
-                style = MaterialTheme.typography.bodyLarge
-            )
-            if (isSelected) {
-                Text(
-                    text = "Selected for notes, explanations, and study tools.",
-                    style = MaterialTheme.typography.labelMedium
-                )
-            }
-            if (verse.hasItalicWords) {
-                Text(
-                    text = "Contains italicized supplied words.",
-                    style = MaterialTheme.typography.labelMedium
-                )
-            }
-        }
-    }
-}
-
-@Composable
-private fun SelectedVerseNotesCard(
-    notes: List<String>,
-    onClose: () -> Unit
-) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "Marginal Notes",
-                style = MaterialTheme.typography.titleMedium
-            )
-            if (notes.isEmpty()) {
-                Text(
-                    text = "No marginal notes are loaded for this verse yet.",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            } else {
-                notes.forEachIndexed { index, note ->
-                    Text(
-                        text = "${index + 1}. $note",
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-            }
-            TextButton(onClick = onClose) {
-                Text("Close")
-            }
-        }
-    }
-}
-
-@Composable
-private fun SelectedVerseExplanationsCard(
-    explanations: List<ExplanationEntry>,
-    depth: ExplanationDepth
-) {
-    Card(modifier = Modifier.fillMaxWidth()) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            Text(
-                text = "Explanations (${depth.name})",
-                style = MaterialTheme.typography.titleMedium
-            )
-            if (explanations.isEmpty()) {
-                Text(
-                    text = "No explanations available for this verse and depth yet.",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            } else {
-                explanations.forEach { explanation ->
-                    Text(
-                        text = explanation.contentMarkdown,
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
-            }
-        }
     }
 }
 
@@ -585,8 +920,7 @@ private fun SeekerPathScreen(
             }
         }
         item {
-            val active = tracks.firstOrNull { it.trackId == activeTrackId }
-            if (active != null) {
+            tracks.firstOrNull { it.trackId == activeTrackId }?.let { active ->
                 Text(active.description, style = MaterialTheme.typography.bodyMedium)
             }
         }

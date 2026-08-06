@@ -5,6 +5,11 @@ enum class OrthographyMode {
     MODERNIZED
 }
 
+enum class TranslationMode {
+    KJV_1611,
+    ESV
+}
+
 enum class ExplanationDepth {
     MINIMAL,
     HISTORICAL_LINGUISTIC,
@@ -20,13 +25,22 @@ enum class TestamentSection {
 data class VerseText(
     val id: Long,
     val book: String,
+    val bookOriginal: String?,
     val chapter: Int,
     val verse: Int,
     val section: TestamentSection,
     val originalText: String,
     val modernizedText: String,
+    val comparativeText: String?,
     val hasItalicWords: Boolean
 )
+
+sealed class ReaderItem {
+    data class SectionHeader(val section: TestamentSection) : ReaderItem()
+    data class BookHeader(val book: String, val bookOriginal: String?) : ReaderItem()
+    data class ChapterHeader(val book: String, val chapter: Int) : ReaderItem()
+    data class VerseLine(val verse: VerseText) : ReaderItem()
+}
 
 data class MarginalNote(
     val id: Long,
@@ -36,6 +50,7 @@ data class MarginalNote(
 
 data class ChapterIndexEntry(
     val book: String,
+    val bookOriginal: String?,
     val chapter: Int,
     val section: TestamentSection,
     val firstCanonicalOrder: Int

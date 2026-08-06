@@ -24,6 +24,7 @@ interface StudyRepository {
     fun observeVerses(query: String): Flow<List<VerseText>>
     fun observeChapterVerses(book: String, chapter: Int): Flow<List<VerseText>>
     fun observeChapterIndex(): Flow<List<ChapterIndexEntry>>
+    suspend fun getChapterVerses(book: String, chapter: Int): List<VerseText>
     fun observeMarginalNotes(verseId: Long): Flow<List<MarginalNote>>
     fun observeExplanations(verseId: Long, level: ExplanationDepth): Flow<List<ExplanationEntry>>
     fun observeExplanationDepth(): Flow<ExplanationDepth>
@@ -32,6 +33,7 @@ interface StudyRepository {
     fun observeBookmarks(): Flow<List<BookmarkItem>>
     fun observeHighlights(): Flow<List<HighlightItem>>
     fun observePersonalNotes(): Flow<List<PersonalNoteItem>>
+    fun observeImportProgress(): Flow<Float>
     suspend fun addBookmark(verseId: Long)
     suspend fun addHighlight(verseId: Long, colorName: String)
     suspend fun savePersonalNote(verseId: Long, note: String)
@@ -49,14 +51,22 @@ class OfflineStudyRepository @Inject constructor(
     private val highlightDao: HighlightDao,
     private val personalNoteDao: PersonalNoteDao,
     private val canonicalDataLoader: CanonicalDataLoader,
-    private val dataImporter: StudyDataImporter
+    private val dataImporter: StudyDataImporter,
 ) : StudyRepository {
 
     override fun observeVerses(query: String): Flow<List<VerseText>> {
         val source = if (query.isBlank()) {
             verseDao.observeAllVerses()
         } else {
-            verseDao.observeVersesByQuery(query)
+            val ftsQuery = query.trim().split("\\s+".toRegex()).asSequence()
+                .filter { it.isNotBlank() }
+                .joinToString(" ") { "$it*" }
+            
+            if (ftsQuery.isBlank()) {
+                verseDao.observeAllVerses()
+            } else {
+                verseDao.searchVerses(ftsQuery)
+            }
         }
 
         return source.map { entities -> entities.map { it.toModel() } }
@@ -71,6 +81,10 @@ class OfflineStudyRepository @Inject constructor(
         return verseDao.observeChapterIndex().map { rows ->
             rows.map { it.toModel() }
         }
+    }
+
+    override suspend fun getChapterVerses(book: String, chapter: Int): List<VerseText> {
+        return verseDao.getVersesByChapter(book, chapter).map { it.toModel() }
     }
 
     override fun observeMarginalNotes(verseId: Long): Flow<List<MarginalNote>> {
@@ -121,6 +135,7 @@ class OfflineStudyRepository @Inject constructor(
     override fun observeSeekerSteps(trackId: String): Flow<List<SeekerStepEntry>> = flow {
         emit(
             canonicalDataLoader.loadSeekerSteps()
+                .asSequence()
                 .filter { it.trackId == trackId }
                 .sortedBy { it.sequence }
                 .map {
@@ -129,9 +144,10 @@ class OfflineStudyRepository @Inject constructor(
                         trackId = it.trackId,
                         sequence = it.sequence,
                         title = it.title,
-                        bodyMarkdown = it.bodyMarkdown
+                        bodyMarkdown = it.bodyMarkdown,
                     )
                 }
+                .toList()
         )
     }
 
@@ -157,18 +173,20 @@ class OfflineStudyRepository @Inject constructor(
                     updatedAtEpochMillis = it.updatedAtEpochMillis
                 )
             }
+        }
+    }
 
-            override fun observeHighlights(): Flow<List<HighlightItem>> {
-                return highlightDao.observeAll().map { entities ->
-                    entities.map {
-                        HighlightItem(
-                            id = it.id,
-                            verseId = it.verseId,
-                            colorName = it.colorName,
-                            createdAtEpochMillis = it.createdAtEpochMillis
-                        )
-                    }
-                }
+    override fun observeImportProgress(): Flow<Float> = dataImporter.importProgress
+
+    override fun observeHighlights(): Flow<List<HighlightItem>> {
+        return highlightDao.observeAll().map { entities ->
+            entities.map {
+                HighlightItem(
+                    id = it.id,
+                    verseId = it.verseId,
+                    colorName = it.colorName,
+                    createdAtEpochMillis = it.createdAtEpochMillis
+                )
             }
         }
     }
@@ -187,7 +205,7 @@ class OfflineStudyRepository @Inject constructor(
             PersonalNoteEntity(
                 verseId = verseId,
                 note = note,
-                updatedAtEpochMillis = System.currentTimeMillis()
+                updatedAtEpochMillis = System.currentTimeMillis(),
             )
         )
     }
@@ -219,11 +237,13 @@ class OfflineStudyRepository @Inject constructor(
         return VerseText(
             id = id,
             book = book,
+            bookOriginal = bookOriginal,
             chapter = chapter,
             verse = verse,
             section = section,
             originalText = originalText,
             modernizedText = modernizedText,
+            comparativeText = comparativeText,
             hasItalicWords = hasItalicWords
         )
     }
@@ -231,6 +251,7 @@ class OfflineStudyRepository @Inject constructor(
     private fun ChapterIndexRow.toModel(): ChapterIndexEntry {
         return ChapterIndexEntry(
             book = book,
+            bookOriginal = bookOriginal,
             chapter = chapter,
             section = section,
             firstCanonicalOrder = firstCanonicalOrder

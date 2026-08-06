@@ -28,29 +28,43 @@ class CanonicalDataLoader @Inject constructor(
     }
 
     fun loadVerses(): List<CanonicalVerseRecord> {
-        val json = readAsset("study/verses_1611.json")
-        val array = JSONArray(json)
+        val files = context.assets.list("study") ?: emptyArray()
+        android.util.Log.i("CanonicalDataLoader", "Found files in study asset folder: ${files.joinToString()}")
+        val verseFiles = files.filter { it.startsWith("verses_") && it.endsWith(".json") }
+        android.util.Log.i("CanonicalDataLoader", "Filtered verse files: ${verseFiles.joinToString()}")
+        
         return buildList {
-            for (i in 0 until array.length()) {
-                val item = array.getJSONObject(i)
-                add(
-                    CanonicalVerseRecord(
-                        id = item.getLong("id"),
-                        book = item.getString("book_display_name"),
-                        chapter = item.getInt("chapter"),
-                        verse = item.getInt("verse"),
-                        section = TestamentSection.valueOf(item.getString("testament_section")),
-                        canonicalOrder = item.getInt("canonical_order"),
-                        originalText = item.getString("text_original_1611"),
-                        modernizedText = item.getString("text_modernized_spelling"),
-                        hasItalicWords = item.optBoolean("has_italicized_words", false),
-                        sourceId = item.getString("source_id"),
-                        sourceLocator = item.getString("source_locator"),
-                        checksumSha256 = item.getString("checksum_sha256")
+            verseFiles.forEach { fileName ->
+                val json = readAsset("study/$fileName")
+                val array = JSONArray(json)
+                for (i in 0 until array.length()) {
+                    val item = array.getJSONObject(i)
+                    add(
+                        CanonicalVerseRecord(
+                            id = item.getLong("id"),
+                            book = item.getString("book_display_name"),
+                            bookOriginal = if (item.has("book_original_1611")) item.getString("book_original_1611") else null,
+                            chapter = item.getInt("chapter"),
+                            verse = item.getInt("verse"),
+                            section = when(item.getString("testament_section")) {
+                                "OT" -> TestamentSection.OLD_TESTAMENT
+                                "APOC" -> TestamentSection.APOCRYPHA
+                                "NT" -> TestamentSection.NEW_TESTAMENT
+                                else -> TestamentSection.valueOf(item.getString("testament_section"))
+                            },
+                            canonicalOrder = item.getInt("canonical_order"),
+                            originalText = item.getString("text_original_1611"),
+                            modernizedText = item.getString("text_modernized_spelling"),
+                            comparativeText = if (item.has("text_comparative_esv")) item.getString("text_comparative_esv") else null,
+                            hasItalicWords = item.optBoolean("has_italicized_words", false),
+                            sourceId = item.optString("source_id", "structure-placeholder"),
+                            sourceLocator = item.optString("source_locator", ""),
+                            checksumSha256 = item.optString("checksum_sha256", "00000000")
+                        )
                     )
-                )
+                }
             }
-        }
+        }.sortedBy { it.canonicalOrder }
     }
 
     fun loadMarginalNotes(): List<CanonicalMarginalNoteRecord> {

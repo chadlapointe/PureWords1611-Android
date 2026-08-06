@@ -3,8 +3,16 @@
     "explanation_id": "exp-gen-1-1-hl",
     "verse_id": 1,
     "level": "HISTORICAL_LINGUISTIC",
-    "content_markdown": "The 1611 orthography uses \\\"heauen\\\" where modernized spelling is \\\"heaven\\\".",
+    "content_markdown": "The 1611 orthography uses \\\"heauen\\\" where modernized spelling is \\\"heaven\\\". This reflects the 17th-century usage of 'u' and 'v'.",
     "source_id": "kjv1611-facsimile-sample",
-    "checksum_sha256": "95d34412ee35d91f970d86cb7f74b34d365ebc71d98fd34e0825727ce4ce5e95"
+    "checksum_sha256": "95..."
+  },
+  {
+    "explanation_id": "exp-ps-23-1-hld",
+    "verse_id": 4,
+    "level": "HISTORICAL_LIGHT_DOCTRINAL",
+    "content_markdown": "The use of \\\"shepheard\\\" with 'ea' is a common archaic spelling. Doctrinally, this highlights the personal relationship between the Lord and the believer as seen in the 1611 text.",
+    "source_id": "kjv1611-facsimile-sample",
+    "checksum_sha256": "..."
   }
 ]

@@ -14,9 +14,9 @@ import javax.inject.Inject
  * Game states for word matching.
  */
 sealed class MatchingGameState {
-    object Playing : MatchingGameState()
-    object LevelComplete : MatchingGameState()
-    object GameComplete : MatchingGameState()
+    data object Playing : MatchingGameState()
+    data object LevelComplete : MatchingGameState()
+    data object GameComplete : MatchingGameState()
 }
 
 /**
@@ -33,7 +33,7 @@ data class WordMatchingUiState(
     val mistakes: Int = 0,
     val gameState: MatchingGameState = MatchingGameState.Playing,
     val feedback: String = "",
-    val totalLevels: Int = 5
+    val totalLevels: Int = 5,
 )
 
 /**
@@ -91,8 +91,8 @@ class WordMatchingViewModel @Inject constructor() : ViewModel() {
         }
         
         // Build maps
-        leftWordMap = leftWords.associate { it.id to it.text }
-        rightWordMap = rightWords.associate { it.id to it.text }
+        leftWordMap = leftWords.associateBy({ it.id }, { it.text })
+        rightWordMap = rightWords.associateBy({ it.id }, { it.text })
         
         _uiState.value = WordMatchingUiState(
             currentLevel = level,
@@ -122,7 +122,7 @@ class WordMatchingViewModel @Inject constructor() : ViewModel() {
         )
         
         // If both sides selected, check for match
-        if (newSelectedLeft != null && current.selectedRightId != null) {
+        if ((newSelectedLeft != null) && (current.selectedRightId != null)) {
             checkMatch()
         }
     }

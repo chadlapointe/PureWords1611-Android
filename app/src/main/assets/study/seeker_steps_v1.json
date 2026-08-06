@@ -1,16 +1,37 @@
 [
   {
-    "step_id": "full-1",
+    "step_id": "full-ev-1",
     "track_id": "FULL_EVIDENCE",
     "sequence": 1,
-    "title": "Begin with the pure words",
-    "body_markdown": "Read Psalm 12:6 and observe the claim of purity."
+    "title": "The Mandate",
+    "body_markdown": "King James I commissioned the translation in 1604, aiming for a version that was accurate and accessible."
   },
   {
-    "step_id": "gentle-1",
-    "track_id": "GENTLER_START",
-    "sequence": 1,
-    "title": "Start with Scripture context",
-    "body_markdown": "Read Genesis 1:1 and note the consistency of the text claim."
+    "step_id": "full-ev-2",
+    "track_id": "FULL_EVIDENCE",
+    "sequence": 2,
+    "title": "The Translators",
+    "body_markdown": "Six committees comprising 47 of the greatest scholars of the day worked diligently on the translation."
+  },
+  {
+    "step_id": "full-ev-3",
+    "track_id": "FULL_EVIDENCE",
+    "sequence": 3,
+    "title": "The 1611 Printing",
+    "body_markdown": "The first edition was printed by Robert Barker in 1611, featuring unique orthography and marginal notes."
+  },
+  {
+    "step_id": "full-ev-4",
+    "track_id": "FULL_EVIDENCE",
+    "sequence": 4,
+    "title": "The Apocrypha",
+    "body_markdown": "The original 1611 KJV included the Apocrypha between the Testaments, as part of the historical corpus."
+  },
+  {
+    "step_id": "full-ev-5",
+    "track_id": "FULL_EVIDENCE",
+    "sequence": 5,
+    "title": "Standardization",
+    "body_markdown": "Over the centuries, spellings were modernized, leading to the versions commonly used today, while the 1611 remains the foundation."
   }
 ]

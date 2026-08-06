@@ -14,10 +14,11 @@ import com.purewords1611.android.study.data.TestamentSection
         HighlightEntity::class,
         PersonalNoteEntity::class,
         ExplanationEntity::class,
-        ReadingPreferenceEntity::class
+        ReadingPreferenceEntity::class,
+        VerseFtsEntity::class,
     ],
-    version = 3,
-    exportSchema = false
+    version = 13,
+    exportSchema = false,
 )
 @TypeConverters(StudyTypeConverters::class)
 abstract class StudyDatabase : RoomDatabase() {
@@ -30,7 +31,7 @@ abstract class StudyDatabase : RoomDatabase() {
     abstract fun readingPreferenceDao(): ReadingPreferenceDao
 }
 
-class StudyTypeConverters {
+object StudyTypeConverters {
     @TypeConverter
     fun fromSection(value: TestamentSection): String = value.name
 

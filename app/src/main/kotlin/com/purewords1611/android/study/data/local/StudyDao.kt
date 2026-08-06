@@ -9,9 +9,10 @@ import kotlinx.coroutines.flow.Flow
 
 data class ChapterIndexRow(
     val book: String,
+    val bookOriginal: String?,
     val chapter: Int,
     val section: TestamentSection,
-    val firstCanonicalOrder: Int
+    val firstCanonicalOrder: Int,
 )
 
 @Dao
@@ -29,9 +30,19 @@ interface VerseDao {
            OR modernizedText LIKE '%' || :query || '%'
            OR book LIKE '%' || :query || '%'
         ORDER BY canonicalOrder ASC
-        """
+        """,
     )
     fun observeVersesByQuery(query: String): Flow<List<VerseEntity>>
+
+    @Query(
+        """
+        SELECT * FROM verses
+        JOIN verses_fts ON verses.id = verses_fts.docid
+        WHERE verses_fts MATCH :query
+        ORDER BY canonicalOrder ASC
+        """
+    )
+    fun searchVerses(query: String): Flow<List<VerseEntity>>
 
     @Query(
         """
@@ -44,9 +55,18 @@ interface VerseDao {
 
     @Query(
         """
-        SELECT book, chapter, section, MIN(canonicalOrder) AS firstCanonicalOrder
+        SELECT * FROM verses
+        WHERE book = :book AND chapter = :chapter
+        ORDER BY canonicalOrder ASC
+        """
+    )
+    suspend fun getVersesByChapter(book: String, chapter: Int): List<VerseEntity>
+
+    @Query(
+        """
+        SELECT book, bookOriginal, chapter, section, MIN(canonicalOrder) AS firstCanonicalOrder
         FROM verses
-        GROUP BY book, chapter, section
+        GROUP BY book, bookOriginal, chapter, section
         ORDER BY firstCanonicalOrder ASC
         """
     )
@@ -54,6 +74,9 @@ interface VerseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(verses: List<VerseEntity>)
+
+    @Query("DELETE FROM verses")
+    suspend fun deleteAll()
 }
 
 @Dao
@@ -66,6 +89,9 @@ interface MarginalNoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(notes: List<MarginalNoteEntity>)
+
+    @Query("DELETE FROM marginal_notes")
+    suspend fun deleteAll()
 }
 
 @Dao
@@ -108,12 +134,18 @@ interface ExplanationDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertAll(explanations: List<ExplanationEntity>)
+
+    @Query("DELETE FROM explanations")
+    suspend fun deleteAll()
 }
 
 @Dao
 interface ReadingPreferenceDao {
     @Query("SELECT * FROM reading_preferences WHERE id = 1")
     fun observePreferences(): Flow<ReadingPreferenceEntity?>
+
+    @Query("SELECT * FROM reading_preferences WHERE id = 1")
+    suspend fun getPreferences(): ReadingPreferenceEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(preferences: ReadingPreferenceEntity)

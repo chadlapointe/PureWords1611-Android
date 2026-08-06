@@ -2,5 +2,17 @@
   {
     "source_id": "kjv1611-facsimile-sample",
     "label": "KJV 1611 Facsimile Reference Sample"
+  },
+  {
+    "source_id": "kjv1611-facsimile",
+    "label": "KJV 1611 Facsimile Reference"
+  },
+  {
+    "source_id": "authentic-1611",
+    "label": "Authentic 1611 Text"
+  },
+  {
+    "source_id": "structure-placeholder",
+    "label": "Pure Words 1611 Bible Structure"
   }
 ]
