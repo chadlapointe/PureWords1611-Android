@@ -115,3 +115,15 @@ Thumbs.db
 
 # Build output
 outputs/
+# Auto-enforced GX10 baseline hygiene
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+variables.env
+.oauth_tokens.json
+.pytest_cache/
+node_modules/
+queue-data/
+*.bak*
